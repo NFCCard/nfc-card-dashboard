@@ -1,9 +1,10 @@
+import Dashboard from "../pages/Dashboard";
 import React from "react";
 
 const routes = [
 	{
 		path: "/",
-		element: <h2>home</h2>,
+		element: <Dashboard />,
 		key: "dashboard",
 		name: "Dashboard",
 		icon: "fas fa-home",
