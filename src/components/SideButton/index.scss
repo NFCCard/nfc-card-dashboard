@@ -1,0 +1,10 @@
+.active {
+	&::before {
+		content: " ";
+		width: 3px;
+		height: 10px;
+		background-color: #291b62;
+		position: absolute;
+		left: 0;
+	}
+}

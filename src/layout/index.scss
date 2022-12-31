@@ -1,0 +1,70 @@
+.holy-grail {
+	display: flex;
+	flex-direction: column;
+}
+
+.holy-grail__main {
+	/* Take the remaining height */
+	flex-grow: 1;
+
+	/* Layout the left sidebar, main content and right sidebar */
+	display: flex;
+	flex-direction: row;
+	background-color: inherit !important;
+}
+
+.holy-grail__left {
+}
+
+.holy-grail__middle {
+	/* Take the remaining width */
+	position: relative;
+	left: 20%;
+	margin: 2rem;
+}
+
+.holy-grail__right {
+	width: 20%;
+}
+
+.header {
+	align-self: flex-end;
+	width: 85%;
+	background-color: red;
+}
+
+.sidebar {
+	width: 15%;
+	background-color: #fff;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding: 1rem;
+}
+
+.list-item {
+	a {
+		background-color: #291b62;
+		padding: 0.3rem;
+		margin-bottom: 0.5rem;
+		border-radius: 10px !important;
+		text-align: center;
+		cursor: pointer;
+		display: flex;
+		flex: 0 0 100%;
+		outline: none !important;
+		transition: color 0.2s ease, background-color 0.2s ease;
+		text-align: center;
+		justify-content: flex-end;
+		text-decoration: none !important;
+		flex-direction: column;
+		color: #ffffff !important;
+		&:hover {
+			background-color: #1e134d !important;
+			border-radius: 10px !important;
+		}
+	}
+}
