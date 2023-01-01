@@ -2,34 +2,31 @@ import React from "react";
 import Dashboard from "../pages/Dashboard";
 import Users from "../pages/Users";
 import Login from "../pages/Login";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
+import { useAuth } from "../hooks/auth/useAuth";
 
 function Navigation() {
+	const isAuthenticated = useAuth();
+
 	return (
-		<Routes>
-			<Route path='login' element={<Login />} />
-			<Route path='/*' element={<Dashboard />} />
-			<Route path='dashboard' element={<Dashboard />} />
-			<Route path='users' element={<Users />} />
-		</Routes>
+		<>
+			{isAuthenticated ? (
+				<Routes>
+					<Route path='users' element={<ProtectedRoute Component={<Users />} />} />
+					<Route
+						path='dashboard'
+						element={<ProtectedRoute Component={<Dashboard />} />}
+					/>
+					<Route path='/*' element={<Navigate to={"dashboard"} />} />
+				</Routes>
+			) : (
+				<Routes>
+					<Route path='/*' element={<Login />} />
+				</Routes>
+			)}
+		</>
 	);
 }
-
-// const routes = [
-// 	{
-// 		path: "/dashboard",
-// 		element: <Dashboard />,
-// 		key: "dashboard",
-// 		name: "Dashboard",
-// 		icon: "fas fa-home",
-// 	},
-// 	{
-// 		path: "/users",
-// 		element: <Users />,
-// 		key: "user",
-// 		name: "Users",
-// 		icon: "fas fa-users",
-// 	},
-// ];
 
 export default Navigation;

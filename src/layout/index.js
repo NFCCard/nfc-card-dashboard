@@ -5,11 +5,11 @@ import { SideButton } from "../components";
 function Layout({ children }) {
 	const buttonData = [
 		{
-			buttonUrl: "dashboard",
+			buttonUrl: "/dashboard",
 			title: "Dashboard",
 		},
 		{
-			buttonUrl: "users",
+			buttonUrl: "/users",
 			title: "Users",
 		},
 	];

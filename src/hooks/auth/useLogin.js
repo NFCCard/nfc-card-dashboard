@@ -11,11 +11,11 @@ const useLogin = () => {
 		},
 		onSuccess: (data, variables, context) => {
 			console.log("success", "با موفقیت وارد شدید");
-			console.log({ data });
-			Cookies.set("_s", JSON.stringify(data));
-			// setTimeout(() => {
-			// 	window.location.reload();
-			// }, 2000);
+			console.log(data);
+			Cookies.set("TOKEN", data.access_token);
+			Cookies.set("USER_NAME", data.user.username);
+			Cookies.set("USER_TYPE", JSON.stringify(data.user.id));
+			window.location.replace("/dashboard");
 		},
 	});
 };
