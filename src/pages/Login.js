@@ -2,16 +2,20 @@ import React from "react";
 import "./loginStyle.scss";
 import { useFormik } from "formik";
 import { loginValidations } from "../validations/loginValidation";
+import useLogin from "../hooks/auth/useLogin";
 
 const Login = () => {
+	const { mutate, data, isLoading } = useLogin();
+
 	//formik
 	const initialValues = {
-		email: "",
+		username: "",
 		password: "",
 	};
 
 	const handelSubmit = (values) => {
 		console.log(values);
+		mutate(values);
 	};
 
 	const formik = useFormik({
@@ -27,17 +31,17 @@ const Login = () => {
 			<form action='submit' className='loginForm' onSubmit={formik.handleSubmit}>
 				<div className='d-flex flex-column '>
 					<div className='position-relative'>
-						<label htmlFor='email'>email</label>
+						<label htmlFor='username'>username</label>
 						<input
 							type='text'
-							id='email'
+							id='username'
 							onChange={(e) => {
-								formik.setValues({ ...formik.values, email: e.target.value });
+								formik.setValues({ ...formik.values, username: e.target.value });
 							}}
-							onFocus={() => formik.setTouched({ email: true })}
+							onFocus={() => formik.setTouched({ username: true })}
 						/>
-						{formik.errors.email && formik.touched.email && (
-							<span className='emailError'>{formik.errors.email}</span>
+						{formik.errors.username && formik.touched.username && (
+							<span className='usernameError'>{formik.errors.username}</span>
 						)}
 					</div>
 					<div className='position-relative'>
