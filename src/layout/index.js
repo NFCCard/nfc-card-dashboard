@@ -27,15 +27,13 @@ function Layout({ children }) {
 							<ul className='list-unstyled '>
 								{buttonData.map((button, index) => {
 									return (
-										<>
-											<li className='list-item'>
-												<SideButton
-													key={index}
-													ButtonUrl={button.buttonUrl}
-													buttonContent={button.title}
-												/>
-											</li>
-										</>
+										<li className='list-item' key={index}>
+											<SideButton
+												key={index}
+												ButtonUrl={button.buttonUrl}
+												buttonContent={button.title}
+											/>
+										</li>
 									);
 								})}
 							</ul>

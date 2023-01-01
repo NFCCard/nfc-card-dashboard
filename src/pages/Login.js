@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./loginStyle.scss";
 import { useFormik } from "formik";
 import { loginValidations } from "../validations/loginValidation";
 import useLogin from "../hooks/auth/useLogin";
-import Cookies from "js-cookie";
-import { useAuth } from "../hooks/auth/useAuth";
 
 const Login = () => {
-	const { mutate, data, isLoading } = useLogin();
+	const { mutate } = useLogin();
 
 	//formik
 	const initialValues = {

@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-import React from "react";
 import { useMutation } from "react-query";
 import api from "../../api";
 

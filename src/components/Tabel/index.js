@@ -4,12 +4,16 @@ const Table = () => {
 	return (
 		<div>
 			<table>
-				<tr>
-					<th>name</th>
-				</tr>
-				<tr>
-					<td>ali</td>
-				</tr>
+				<thead>
+					<tr>
+						<th>name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>ali</td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	);
