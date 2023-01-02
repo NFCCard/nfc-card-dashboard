@@ -27,41 +27,51 @@ const Login = () => {
 	});
 
 	return (
-		<div className='loginForm_wrapper text-capitalize user-select-none '>
-			<form action='submit' className='loginForm' onSubmit={formik.handleSubmit}>
-				<div className='d-flex flex-column '>
-					<div className='position-relative'>
-						<label htmlFor='username'>username</label>
-						<input
-							type='text'
-							id='username'
-							onChange={(e) => {
-								formik.setValues({ ...formik.values, username: e.target.value });
-							}}
-							onFocus={() => formik.setTouched({ username: true })}
-						/>
-						{formik.errors.username && formik.touched.username && (
-							<span className='usernameError'>{formik.errors.username}</span>
-						)}
-					</div>
-					<div className='position-relative'>
-						<label htmlFor='password'>password</label>
-						<input
-							type='password'
-							id='password'
-							onChange={(e) => {
-								formik.setValues({ ...formik.values, password: e.target.value });
-							}}
-							onFocus={() => formik.setTouched({ password: true })}
-						/>
-						{formik.errors.password && formik.touched.password && (
-							<span className='passwordError'>{formik.errors.password}</span>
-						)}
-					</div>
+		<div className='loginPage'>
+			<div className='loginForm_wrapper text-capitalize user-select-none '>
+				<form action='submit' className='loginForm' onSubmit={formik.handleSubmit}>
+					<div className='d-flex flex-column '>
+						<div className='position-relative'>
+							<label htmlFor='username'>username</label>
+							<input
+								type='text'
+								id='username'
+								autoComplete='on'
+								onChange={(e) => {
+									formik.setValues({
+										...formik.values,
+										username: e.target.value,
+									});
+								}}
+								onFocus={() => formik.setTouched({ username: true })}
+							/>
+							{formik.errors.username && formik.touched.username && (
+								<span className='usernameError'>{formik.errors.username}</span>
+							)}
+						</div>
+						<div className='position-relative'>
+							<label htmlFor='password'>password</label>
+							<input
+								type='password'
+								id='password'
+								autoComplete='on'
+								onChange={(e) => {
+									formik.setValues({
+										...formik.values,
+										password: e.target.value,
+									});
+								}}
+								onFocus={() => formik.setTouched({ password: true })}
+							/>
+							{formik.errors.password && formik.touched.password && (
+								<span className='passwordError'>{formik.errors.password}</span>
+							)}
+						</div>
 
-					<button type='submit'>Login</button>
-				</div>
-			</form>
+						<button type='submit'>Login</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	);
 };

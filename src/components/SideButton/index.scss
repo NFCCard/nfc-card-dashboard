@@ -2,9 +2,10 @@
 	&::before {
 		content: " ";
 		width: 3px;
-		height: 10px;
-		background-color: #291b62;
+		background-color: #e9e9eb;
 		position: absolute;
 		left: 0;
+		top: 0;
+		bottom: 0;
 	}
 }

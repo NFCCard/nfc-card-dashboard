@@ -10,7 +10,7 @@ function Users() {
 	}
 	return (
 		<Layout>
-			<Table />
+			<Table data={data} />
 		</Layout>
 	);
 }

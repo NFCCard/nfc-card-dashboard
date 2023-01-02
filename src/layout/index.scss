@@ -1,6 +1,12 @@
 .holy-grail {
 	display: flex;
 	flex-direction: column;
+	min-height: 100vh;
+}
+
+.holy-grail__left {
+	background-color: #141516 !important;
+	box-shadow: 7px 0 9px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .holy-grail__main {
@@ -11,30 +17,27 @@
 	display: flex;
 	flex-direction: row;
 	background-color: inherit !important;
-}
-
-.holy-grail__left {
+	height: 90vh;
 }
 
 .holy-grail__middle {
 	/* Take the remaining width */
-	position: relative;
-	left: 20%;
-	margin: 2rem;
-}
-
-.holy-grail__right {
-	width: 20%;
+	width: 85%;
+	margin-left: auto;
+	@media (max-height: 900px) {
+		overflow-y: scroll;
+	}
 }
 
 .header {
 	align-self: flex-end;
-	width: 85%;
-	background-color: red;
+	width: 90%;
+	background-color: #19307e;
+	margin: 0 !important;
 }
 
 .sidebar {
-	width: 15%;
+	width: 10%;
 	background-color: #fff;
 	height: 100vh;
 	position: absolute;
@@ -47,11 +50,11 @@
 
 .list-item {
 	a {
-		background-color: #291b62;
+		background-color: #e9e9eb53;
 		padding: 0.3rem;
 		margin-bottom: 0.5rem;
-		border-radius: 10px !important;
-		text-align: center;
+		border-top-right-radius: 6px !important;
+		border-bottom-right-radius: 6px !important;
 		cursor: pointer;
 		display: flex;
 		flex: 0 0 100%;
@@ -61,10 +64,17 @@
 		justify-content: flex-end;
 		text-decoration: none !important;
 		flex-direction: column;
-		color: #ffffff !important;
+		color: #fff !important;
+		position: relative;
+		font-size: 12px;
+
 		&:hover {
-			background-color: #1e134d !important;
-			border-radius: 10px !important;
+			background-color: #19307e !important;
+			// color: #141516 !important;
 		}
+	}
+
+	.nfcLogo {
+		width: 100px;
 	}
 }
