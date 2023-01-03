@@ -8,7 +8,7 @@ const Table = ({ data }) => {
 	return (
 		<div className='d-flex justify-content-center w-100 align-items-center h-100 '>
 			{data ? (
-				<table className='p-4' cellpadding='0' cellspacing='0'>
+				<table className='p-4' cellPadding='0' cellSpacing='0'>
 					<thead>
 						<tr className='text-uppercase'>
 							<th>user</th>
