@@ -4,6 +4,7 @@ import userImage from "../../assets/images/user.png";
 import editPhoto from "../../assets/images/edit.png";
 import deletePhoto from "../../assets/images/delete.png";
 import SpringButtom from "../SpringButtom";
+import { formatPhoneNumber } from "../../helpers/function";
 
 const Table = ({ content }) => {
 	return (
@@ -39,7 +40,7 @@ const Table = ({ content }) => {
 											</div>
 											<div>
 												<span className='phone-number'>
-													{user.profile.phone}
+													{formatPhoneNumber(user.profile.phone)}
 												</span>
 											</div>
 										</div>
