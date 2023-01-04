@@ -1,15 +1,21 @@
-﻿@import url(fontiran.css); /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
+﻿@import url(fontiran.css);
 body {
-	font-family: IRANSansX  !important;
+	font-family: IRANSansX !important;
 }
-h1, h2, h3, h4, h5, h6,input, textarea {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea {
 	font-family: IRANSansX !important;
 }
 h1 {
 	font-weight: bold;
 }
 
-body[dir="rtl"]{
+body[dir="rtl"] {
 	font-feature-settings: "ss02";
-
 }
