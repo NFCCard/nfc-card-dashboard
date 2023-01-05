@@ -4,10 +4,7 @@ import useGetUserList from "../hooks/core/useGetUserList";
 import Layout from "../layout";
 
 function Users() {
-	const { isLoading, isError, data, error, refetch } = useGetUserList();
-	if (!isLoading) {
-		console.log(data);
-	}
+	const { data } = useGetUserList();
 	return (
 		<Layout>
 			<Table content={data} />

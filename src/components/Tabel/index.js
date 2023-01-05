@@ -1,9 +1,9 @@
 import React from "react";
 import "./style.scss";
 import userImage from "../../assets/images/user.png";
-import editPhoto from "../../assets/images/edit.png";
-import deletePhoto from "../../assets/images/delete.png";
-import SpringButtom from "../SpringButtom";
+import edit from "../../assets/images/edit.png";
+import trash from "../../assets/images/delete.png";
+import { SpringButtom } from "../../components";
 import { formatPhoneNumber } from "../../helpers/function";
 
 const Table = ({ content }) => {
@@ -52,10 +52,10 @@ const Table = ({ content }) => {
 									</td>
 									<td>
 										<button className='tableButton'>
-											<img src={editPhoto} alt='edit Image' />
+											<img src={edit} alt='edit' />
 										</button>
 										<button className='tableButton'>
-											<img src={deletePhoto} alt='delete Image' />
+											<img src={trash} alt='delete' />
 										</button>
 									</td>
 								</tr>
@@ -66,7 +66,7 @@ const Table = ({ content }) => {
 			) : (
 				<h2>loading</h2>
 			)}
-			{/* <SpringButtom /> */}
+			<SpringButtom />
 		</div>
 	);
 };

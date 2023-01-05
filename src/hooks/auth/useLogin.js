@@ -10,10 +10,15 @@ const useLogin = () => {
 		},
 		onSuccess: (data, variables, context) => {
 			console.log("success", "با موفقیت وارد شدید");
-			console.log(data);
-			Cookies.set("TOKEN", data.access_token);
-			Cookies.set("USER_NAME", data.user.username);
-			Cookies.set("USER_TYPE", JSON.stringify(data.user.id));
+			Cookies.set(
+				"INFO",
+				JSON.stringify({
+					access_token: data.access_token,
+					username: data.user.username,
+					userId: data.user.id,
+				})
+			);
+
 			window.location.replace("/dashboard");
 		},
 	});
