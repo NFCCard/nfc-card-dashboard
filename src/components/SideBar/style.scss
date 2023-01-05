@@ -1,0 +1,30 @@
+.list-item {
+	a {
+		// background-color: #e9e9eb53;
+		padding: 0.3rem;
+		margin-bottom: 0.5rem;
+		// border-top-right-radius: 6px !important;
+		// border-bottom-right-radius: 6px !important;
+		cursor: pointer;
+		display: flex;
+		flex: 0 0 100%;
+		outline: none !important;
+		transition: color 0.2s ease, background-color 0.2s ease;
+		text-align: center;
+		justify-content: flex-end;
+		text-decoration: none !important;
+		flex-direction: column;
+		color: #fff !important;
+		position: relative;
+		font-size: 14px;
+
+		&:hover {
+			background-color: #1e2530 !important;
+			// color: #141516 !important;
+		}
+	}
+
+	.nfcLogo {
+		width: 100px;
+	}
+}

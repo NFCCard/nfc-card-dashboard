@@ -66,7 +66,7 @@ const Table = ({ content }) => {
 			) : (
 				<h2>loading</h2>
 			)}
-			<SpringButtom />
+			{/* <SpringButtom /> */}
 		</div>
 	);
 };
