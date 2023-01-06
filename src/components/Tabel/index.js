@@ -5,10 +5,9 @@ import edit from "../../assets/images/edit.png";
 import trash from "../../assets/images/delete.png";
 import { formatPhoneNumber } from "../../helpers/function";
 import { useState } from "react";
+import { Modal } from "../../components";
 
 const Table = ({ content }) => {
-	const [open, setOpen] = useState(false);
-
 	return (
 		<div className='d-flex justify-content-center w-100 align-items-center h-100 '>
 			{content ? (
@@ -16,7 +15,7 @@ const Table = ({ content }) => {
 					<thead>
 						<tr className='text-uppercase'>
 							<th>user</th>
-							<th>contact</th>
+							<th>Email</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -25,25 +24,27 @@ const Table = ({ content }) => {
 						{content.data.map((user, index) => {
 							return (
 								<tr key={index}>
-									<td className='d-flex align-items-center gap-2'>
-										<img
-											className='avatar'
-											src={
-												user.profile.resource
-													? user.profile.resource.url
-													: userImage
-											}
-											alt={user.username}
-										/>
-										<div className='d-flex  flex-column '>
-											<div className='d-flex gap-2'>
-												<span>{user.profile.last_name.fa}</span>
-												<span>{user.profile.first_name.fa}</span>
-											</div>
-											<div>
-												<span className='phone-number'>
-													{formatPhoneNumber(user.profile.phone)}
-												</span>
+									<td className=''>
+										<div className='d-flex align-items-center gap-2'>
+											<img
+												className='avatar'
+												src={
+													user.profile.resource
+														? user.profile.resource.url
+														: userImage
+												}
+												alt={user.username}
+											/>
+											<div className='d-flex  flex-column '>
+												<div className='d-flex gap-2'>
+													<span>{user.profile.last_name.fa}</span>
+													<span>{user.profile.first_name.fa}</span>
+												</div>
+												<div>
+													<span className='phone-number'>
+														{formatPhoneNumber(user.profile.phone)}
+													</span>
+												</div>
 											</div>
 										</div>
 									</td>
@@ -53,12 +54,15 @@ const Table = ({ content }) => {
 										</div>
 									</td>
 									<td>
-										<button className='tableButton'>
-											<img src={edit} alt='edit' />
-										</button>
-										<button className='tableButton'>
-											<img src={trash} alt='delete' />
-										</button>
+										<div className='d-flex'>
+											<Modal modalButton={<img src={trash} alt='delete' />}>
+												<span>{user.profile.last_name.fa}</span>
+												<span>{user.profile.first_name.fa}</span>
+											</Modal>
+											<Modal modalButton={<img src={edit} alt='edit' />}>
+												salam
+											</Modal>
+										</div>
 									</td>
 								</tr>
 							);
