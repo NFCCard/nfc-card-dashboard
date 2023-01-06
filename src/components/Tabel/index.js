@@ -3,10 +3,12 @@ import "./style.scss";
 import userImage from "../../assets/images/user.png";
 import edit from "../../assets/images/edit.png";
 import trash from "../../assets/images/delete.png";
-import { SpringButtom } from "../../components";
 import { formatPhoneNumber } from "../../helpers/function";
+import { useState } from "react";
 
 const Table = ({ content }) => {
+	const [open, setOpen] = useState(false);
+
 	return (
 		<div className='d-flex justify-content-center w-100 align-items-center h-100 '>
 			{content ? (
@@ -66,7 +68,6 @@ const Table = ({ content }) => {
 			) : (
 				<h2>loading</h2>
 			)}
-			{/* <SpringButtom /> */}
 		</div>
 	);
 };
