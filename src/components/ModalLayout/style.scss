@@ -38,3 +38,7 @@
 .ReactModal__Overlay--before-close {
 	opacity: 0;
 }
+
+.ReactModal__Content {
+	inset: 190px !important;
+}

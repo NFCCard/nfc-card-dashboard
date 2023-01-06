@@ -1,5 +1,6 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import ModalContextProvider from "./context/ModalContextProvider";
 import Navigation from "./routes";
 
 function App() {
@@ -7,7 +8,9 @@ function App() {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<Navigation />
+			<ModalContextProvider>
+				<Navigation />
+			</ModalContextProvider>
 		</QueryClientProvider>
 	);
 }

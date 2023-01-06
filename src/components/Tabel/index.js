@@ -5,7 +5,7 @@ import edit from "../../assets/images/edit.png";
 import trash from "../../assets/images/delete.png";
 import { formatPhoneNumber } from "../../helpers/function";
 import { useState } from "react";
-import { Modal } from "../../components";
+import { ModalLayout } from "../../components";
 
 const Table = ({ content }) => {
 	return (
@@ -55,13 +55,17 @@ const Table = ({ content }) => {
 									</td>
 									<td>
 										<div className='d-flex'>
-											<Modal modalButton={<img src={trash} alt='delete' />}>
+											<ModalLayout
+												modalButton={<img src={trash} alt='delete' />}
+											>
 												<span>{user.profile.last_name.fa}</span>
 												<span>{user.profile.first_name.fa}</span>
-											</Modal>
-											<Modal modalButton={<img src={edit} alt='edit' />}>
+											</ModalLayout>
+											<ModalLayout
+												modalButton={<img src={edit} alt='edit' />}
+											>
 												salam
-											</Modal>
+											</ModalLayout>
 										</div>
 									</td>
 								</tr>
