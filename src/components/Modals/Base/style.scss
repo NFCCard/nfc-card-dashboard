@@ -7,28 +7,9 @@
 	transform: translate(-50%, -50%);
 }
 
-.tableButton {
-	border: none;
-	border-radius: 6px;
-	width: 27px;
-	height: 27px;
-	margin-left: 5px;
-	background-color: #19307e;
-	box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(229, 228, 228, 0.24);
-	transition: color 0.2s ease, background-color 0.2s ease-in-out;
-
-	&:hover {
-		background-color: #12225a;
-	}
-
-	img {
-		width: 100%;
-	}
-}
-
 .ReactModal__Overlay {
 	opacity: 0;
-	transition: all 100ms linear;
+	transition: all 100ms cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .ReactModal__Overlay--after-open {
@@ -39,6 +20,17 @@
 	opacity: 0;
 }
 
-.ReactModal__Content {
-	inset: 190px !important;
+.ReactModal__Overlay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(41, 38, 38, 0.85) !important;
+	z-index: 1 !important;
+
+	.ReactModal__Content {
+		width: fit-content !important;
+		height: fit-content !important;
+		inset: unset !important;
+		border-radius: 6px !important;
+	}
 }

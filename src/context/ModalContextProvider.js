@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 
-export const modalContext = createContext();
+export const ModalContext = createContext();
 const ModalContextProvider = ({ children }) => {
 	const [modalState, setModalState] = useState({
 		edit: false,
@@ -8,9 +8,9 @@ const ModalContextProvider = ({ children }) => {
 	});
 
 	return (
-		<modalContext.Provider value={{ modalState, setModalState }}>
+		<ModalContext.Provider value={{ modalState, setModalState }}>
 			{children}
-		</modalContext.Provider>
+		</ModalContext.Provider>
 	);
 };
 
