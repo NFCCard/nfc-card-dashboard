@@ -1,11 +1,11 @@
 import React from "react";
 import "./style.scss";
 import userImage from "../../assets/images/user.png";
+import { formatPhoneNumber } from "../../helpers/function";
 import edit from "../../assets/images/edit.png";
 import trash from "../../assets/images/delete.png";
-import { formatPhoneNumber } from "../../helpers/function";
-import { useState } from "react";
-import { ModalLayout } from "../../components";
+import EditModal from "../Modals/EditModal";
+import DeleteModal from "../Modals/DeleteModal";
 
 const Table = ({ content }) => {
 	return (
@@ -55,17 +55,18 @@ const Table = ({ content }) => {
 									</td>
 									<td>
 										<div className='d-flex'>
-											<ModalLayout
-												modalButton={<img src={trash} alt='delete' />}
-											>
-												<span>{user.profile.last_name.fa}</span>
-												<span>{user.profile.first_name.fa}</span>
-											</ModalLayout>
-											<ModalLayout
-												modalButton={<img src={edit} alt='edit' />}
-											>
-												salam
-											</ModalLayout>
+											{
+												<>
+													<EditModal
+														modalButton={<img src={edit} alt='edit' />}
+													/>
+													<DeleteModal
+														modalButton={
+															<img src={trash} alt='delete' />
+														}
+													/>
+												</>
+											}
 										</div>
 									</td>
 								</tr>

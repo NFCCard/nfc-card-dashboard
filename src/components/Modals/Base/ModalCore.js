@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
 import Modal from "react-modal";
 import "./style.scss";
-import useClickOutside from "../../hooks/Common/useClickOutside";
+import useClickOutside from "../../../hooks/Common/useClickOutside";
 
-const ModalLayout = ({ children, modalButton }) => {
+const ModalCore = ({ children, modalButton }) => {
 	//ref
 	const modalRef = useRef(null);
 	useClickOutside(!modalRef, () => {
@@ -35,4 +35,4 @@ const ModalLayout = ({ children, modalButton }) => {
 	);
 };
 
-export default ModalLayout;
+export default ModalCore;
