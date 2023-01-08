@@ -5,6 +5,7 @@ const auth = {
 const core = {
 	userlist: "core/users",
 	viewUser: "/core/profiles/",
+	deleteUser: "/core/users/",
 };
 
 const routes = { auth, core };

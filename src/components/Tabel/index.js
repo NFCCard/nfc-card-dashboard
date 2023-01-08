@@ -9,7 +9,7 @@ import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { ModalContext } from "../../context/ModalContextProvider";
 
 const Table = ({ content }) => {
-	const { setModalState, modalState } = useContext(ModalContext);
+	const { setModalState } = useContext(ModalContext);
 	const [user, setUser] = useState();
 
 	// edit modal handler
@@ -33,6 +33,7 @@ const Table = ({ content }) => {
 	};
 	return (
 		<div className='d-flex justify-content-center w-100 align-items-center h-100 '>
+			<span>ssss</span>
 			{content ? (
 				<table className='p-4' cellPadding='0' cellSpacing='0'>
 					<thead>
@@ -56,16 +57,26 @@ const Table = ({ content }) => {
 														? user.profile.resource.url
 														: userImage
 												}
-												alt={user.username}
+												alt={user.username ? user.username : "name"}
 											/>
 											<div className='d-flex  flex-column '>
 												<div className='d-flex gap-2'>
-													<span>{user.profile.last_name.fa}</span>
-													<span>{user.profile.first_name.fa}</span>
+													<span>
+														{user.profile.last_name
+															? user.profile.last_name.fa
+															: "name not found"}
+													</span>
+													<span>
+														{user.profile.first_name
+															? user.profile.first_name.fa
+															: "last name not found"}
+													</span>
 												</div>
 												<div>
 													<span className='phone-number'>
-														{formatPhoneNumber(user.profile.phone)}
+														{user.profile.phone
+															? formatPhoneNumber(user.profile.phone)
+															: "phone number not found"}
 													</span>
 												</div>
 											</div>
@@ -73,7 +84,11 @@ const Table = ({ content }) => {
 									</td>
 									<td>
 										<div className='d-flex flex-column'>
-											<span className='email'>{user.profile.email}</span>
+											<span className='email'>
+												{user.profile.email
+													? user.profile.email
+													: "email not found"}
+											</span>
 										</div>
 									</td>
 									<td>
@@ -107,8 +122,12 @@ const Table = ({ content }) => {
 				<h2>loading</h2>
 			)}
 
-			<EditModal userId={user && user.id} />
-			<DeleteModal userId={user && user.id} userName={user && user.username} />
+			<EditModal userId={user && user.id} modalId={user && user.id} />
+			<DeleteModal
+				userId={user && user.id}
+				userName={user && user.username}
+				modalId={user && user.id}
+			/>
 		</div>
 	);
 };

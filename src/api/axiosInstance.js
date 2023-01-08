@@ -7,9 +7,9 @@ export default axios.create({
 	headers: {
 		Authorization: `
         ${
-			Cookies.get("_s")
+			Cookies.get("INFO")
 				? `
-            Bearer ${JSON.parse(Cookies.get("_s")).access_token}
+            Bearer ${JSON.parse(Cookies.get("INFO")).access_token}
             `
 				: ""
 		}

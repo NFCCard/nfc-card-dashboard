@@ -5,7 +5,7 @@ import { loginValidations } from "../validations/loginValidation";
 import useLogin from "../hooks/auth/useLogin";
 
 const Login = () => {
-	const { mutate } = useLogin();
+	const { mutate: loginMutate } = useLogin();
 
 	//formik
 	const initialValues = {
@@ -15,7 +15,7 @@ const Login = () => {
 
 	const handelSubmit = (values) => {
 		console.log(values);
-		mutate(values);
+		loginMutate(values);
 	};
 
 	const formik = useFormik({
