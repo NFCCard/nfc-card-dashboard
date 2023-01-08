@@ -5,6 +5,7 @@ const ModalContextProvider = ({ children }) => {
 	const [modalState, setModalState] = useState({
 		edit: false,
 		delete: false,
+		create: false,
 	});
 
 	return (
