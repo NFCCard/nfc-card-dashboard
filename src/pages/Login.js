@@ -14,7 +14,6 @@ const Login = () => {
 	};
 
 	const handelSubmit = (values) => {
-		console.log(values);
 		loginMutate(values);
 	};
 

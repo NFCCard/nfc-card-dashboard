@@ -15,7 +15,6 @@ const Table = ({ content, isLoading }) => {
 
 	// edit modal handler
 	const openEditModalHandler = (user) => {
-		// console.log(user);
 		setUser(user);
 		setModalState((prev) => ({
 			...prev,

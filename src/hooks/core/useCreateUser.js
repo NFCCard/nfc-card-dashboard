@@ -8,7 +8,6 @@ const useCreateUser = () => {
 	return useMutation((value) => postRequest.createUser(value), {
 		onError: (error, variables, context) => {
 			// An error happened!
-			console.log("error", error.response.data.message);
 		},
 		onSuccess: (data, variables, context) => {
 			refetch();

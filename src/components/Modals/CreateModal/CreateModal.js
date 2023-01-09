@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import ModalCore from "../Base/ModalCore";
 import { ModalContext } from "../../../context/ModalContextProvider";
 import MultiStepModal from "../MultiStepModal";

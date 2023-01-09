@@ -9,7 +9,6 @@ const useLogin = () => {
 	return useMutation(api.postRequest.login, {
 		onError: (error, variables, context) => {
 			// An error happened!
-			console.log("error", error.response.data.message);
 		},
 		onSuccess: (data, variables, context) => {
 			Cookies.set(
