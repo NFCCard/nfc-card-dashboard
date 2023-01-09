@@ -1,16 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ModalCore from "../Base/ModalCore";
 import { ModalContext } from "../../../context/ModalContextProvider";
 import MultiStepModal from "../MultiStepModal";
 import StepOne from "./StepOne";
+import StepTwo from "./StepTwo";
+import "./style.scss";
+import useCreateUser from "../../../hooks/core/useCreateUser";
 
 const CreateModal = () => {
 	const { setModalState, modalState } = useContext(ModalContext);
+	const { mutate: createMutate, isLoading, isSuccess, data } = useCreateUser();
+	const handelSubmit = (values) => {
+		createMutate(values);
+	};
+
 	const steps = [
-		{ component: <StepOne /> },
-		{ component: <StepOne /> },
-		{ component: <StepOne /> },
+		{
+			name: "step 1",
+			component: <StepOne onSubmit={handelSubmit} isLoading={isLoading} data={data} />,
+		},
+		{ name: "step 2", component: <StepTwo /> },
 	];
+
 	const handleDismiss = () => {
 		setModalState((prev) => ({
 			...prev,
@@ -20,8 +31,7 @@ const CreateModal = () => {
 
 	return (
 		<ModalCore open={modalState.create} onDismiss={handleDismiss}>
-			Create
-			<MultiStepModal steps={steps} showSteps={false} />
+			<MultiStepModal steps={steps} showSteps={false} showNavigation={isSuccess} />
 		</ModalCore>
 	);
 };

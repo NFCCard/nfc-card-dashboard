@@ -1,0 +1,31 @@
+.nextButtonStyle,
+.prevButtonStyle {
+	border: none;
+	border-radius: 6px;
+	margin: 5px;
+	font-size: 12px;
+	padding: 8px;
+	color: #fff;
+}
+
+.nextButtonStyle {
+	background-color: #19307e;
+	box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(229, 228, 228, 0.24);
+	transition: color 0.2s ease, background-color 0.2s ease-in-out;
+	&:hover {
+		background-color: #12225a;
+	}
+}
+.prevButtonStyle {
+	background-color: #7e1b19;
+	box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(229, 228, 228, 0.24);
+	transition: color 0.2s ease, background-color 0.2s ease-in-out;
+	&:hover {
+		background-color: #5f1716;
+	}
+}
+
+.footer-buttons {
+	display: flex;
+	justify-content: flex-end;
+}

@@ -10,33 +10,6 @@
 	font-weight: normal;
 }
 
-.buttonWrapper {
-	display: flex;
-	justify-content: flex-start;
-	flex-direction: column;
-	width: 70%;
-	margin-bottom: 1rem;
-	button {
-		width: fit-content;
-		border: none;
-		border-radius: 6px;
-		background-color: #19307e;
-		box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(229, 228, 228, 0.24);
-		transition: color 0.2s ease, background-color 0.2s ease-in-out;
-		color: #fff;
-		display: flex;
-		gap: 4px;
-		// line-height: 35px;
-		justify-content: center;
-		align-items: center;
-		padding: 0.4rem;
-
-		&:hover {
-			background-color: #12225a;
-		}
-	}
-}
-
 table {
 	color: #0c0c0c !important;
 	user-select: none;
@@ -54,10 +27,6 @@ table {
 	.email {
 		font-family: Roboto !important;
 		font-weight: normal !important;
-	}
-
-	@media (max-height: 900px) {
-		margin-top: 8rem;
 	}
 
 	th {

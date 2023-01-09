@@ -7,9 +7,9 @@ import StepOne from "./StepOne";
 const EditModal = ({ userId }) => {
 	const { setModalState, modalState } = useContext(ModalContext);
 	const steps = [
-		{ component: <StepOne /> },
-		{ component: <StepOne /> },
-		{ component: <StepOne /> },
+		{ name: "step 1", component: <StepOne /> },
+		{ name: "step 2", component: <StepOne /> },
+		{ name: "step 3", component: <StepOne /> },
 	];
 	const handleDismiss = () => {
 		setModalState((prev) => ({

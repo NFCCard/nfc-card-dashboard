@@ -1,8 +1,17 @@
 import React from "react";
 import MultiStep from "react-stepzilla";
+import "./style.scss";
 
-const MultiStepModal = ({ steps, showSteps }) => {
-	return <MultiStep steps={steps} showSteps={showSteps} />;
+const MultiStepModal = ({ steps, showSteps, showNavigation }) => {
+	return (
+		<MultiStep
+			steps={steps}
+			showSteps={showSteps}
+			nextButtonCls='nextButtonStyle'
+			backButtonCls='prevButtonStyle'
+			showNavigation={showNavigation}
+		/>
+	);
 };
 
 export default MultiStepModal;

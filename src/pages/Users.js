@@ -1,20 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Table } from "../components";
 import useGetUserList from "../hooks/core/useGetUserList";
-import useDeleteUser from "../hooks/core/useDeleteUser";
 import Layout from "../layout";
 
 function Users() {
-	const { data, refetch } = useGetUserList();
-	const { isLoading } = useDeleteUser();
-
-	useEffect(() => {
-		refetch();
-	}, [isLoading, data]);
-
+	const { data, isLoading: userListLoading } = useGetUserList();
 	return (
 		<Layout>
-			<Table content={data} />
+			<Table content={data} isLoading={userListLoading} />
 		</Layout>
 	);
 }

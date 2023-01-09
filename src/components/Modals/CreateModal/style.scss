@@ -1,0 +1,60 @@
+.StepOne {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.Form_wrapper {
+		width: 500px;
+
+		.Form {
+			position: relative;
+			z-index: 1;
+			padding: 45px;
+
+			input {
+				font-family: "Roboto", sans-serif;
+				outline: 0;
+				background: #f2f2f2;
+				width: 100%;
+				border: 0;
+				margin: 0 0 15px;
+				padding: 15px;
+				box-sizing: border-box;
+				font-size: 14px;
+			}
+
+			// loginForm button
+			button {
+				font-family: "Roboto", sans-serif;
+				text-transform: capitalize;
+				outline: 0;
+				background-color: #19307e;
+				box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(229, 228, 228, 0.24);
+				transition: color 0.2s ease, background-color 0.2s ease-in-out;
+				border: 0;
+				padding: 4px 15px;
+				color: #ffffff;
+				font-size: 12px;
+				border-radius: 6px;
+				cursor: pointer;
+				margin-top: 1rem;
+
+				&:hover,
+				:active,
+				:focus {
+					background: #12225a;
+				}
+			}
+		}
+
+		.usernameError,
+		.passwordError {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			font-size: 0.6rem;
+			color: rgb(200, 53, 53);
+			font-weight: bold;
+		}
+	}
+}
