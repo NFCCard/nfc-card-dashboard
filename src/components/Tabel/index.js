@@ -65,12 +65,12 @@ const Table = ({ content, isLoading }) => {
 															<span>
 																{user.profile.last_name
 																	? user.profile.last_name.fa
-																	: "name not found"}
+																	: "name "}
 															</span>
 															<span>
 																{user.profile.first_name
 																	? user.profile.first_name.fa
-																	: "last name not found"}
+																	: "last name "}
 															</span>
 														</div>
 														<div>
@@ -79,7 +79,7 @@ const Table = ({ content, isLoading }) => {
 																	? formatPhoneNumber(
 																			user.profile.phone
 																	  )
-																	: "phone number not found"}
+																	: "phone number "}
 															</span>
 														</div>
 													</div>

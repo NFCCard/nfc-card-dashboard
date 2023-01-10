@@ -1,4 +1,4 @@
-.StepOne {
+.Step {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -10,8 +10,48 @@
 			position: relative;
 			z-index: 1;
 			padding: 45px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			font-size: 12px;
 
-			input {
+			.input_wrapper {
+				width: 100px;
+				height: 100px;
+				border: none !important;
+				background-color: #dcdcdc;
+				border-radius: 100%;
+				margin-bottom: 1rem;
+			}
+
+			.imageInput {
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				opacity: 0;
+			}
+
+			.preview {
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+
+				width: 100px !important;
+				height: 100px !important;
+				img {
+					width: 100%;
+					height: 100%;
+					border-radius: 100%;
+					border: none !important;
+				}
+			}
+
+			.textInput {
 				font-family: "Roboto", sans-serif;
 				outline: 0;
 				background: #f2f2f2;

@@ -7,6 +7,8 @@ const core = {
 	viewUser: "/core/profiles/",
 	deleteUser: "/core/users/",
 	createUser: "/core/users",
+	addAvatar: "/core/upload/resource",
+	appendAvatar: "/core/profiles/",
 };
 
 const routes = { auth, core };
