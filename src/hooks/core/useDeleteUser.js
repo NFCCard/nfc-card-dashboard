@@ -11,6 +11,7 @@ const useDeleteUser = () => {
 	return useMutation((userId) => deleteRequest.deleteUser(userId), {
 		onError: (error, variables, context) => {
 			// An error happened!
+			console.log(error);
 		},
 		onSuccess: (data, variables, context) => {
 			refetch();

@@ -10,6 +10,7 @@ const MultiStepModal = ({ steps, showSteps, showNavigation }) => {
 			nextButtonCls='nextButtonStyle'
 			backButtonCls='prevButtonStyle'
 			showNavigation={showNavigation}
+			nextTextOnFinalActionStep='submit'
 		/>
 	);
 };

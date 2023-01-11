@@ -9,6 +9,7 @@ const core = {
 	createUser: "/core/users",
 	addAvatar: "/core/upload/resource",
 	appendAvatar: "/core/profiles/",
+	updateUser: "/core/profiles/",
 };
 
 const routes = { auth, core };
