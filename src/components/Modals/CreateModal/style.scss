@@ -3,6 +3,13 @@
 	justify-content: center;
 	align-items: center;
 
+	.icon_wrapper {
+		a {
+			width: 40px !important;
+			height: 40px !important;
+		}
+	}
+
 	.Form_wrapper {
 		width: 500px;
 
@@ -53,13 +60,14 @@
 			.textInput {
 				font-family: "Roboto", sans-serif;
 				outline: 0;
-				background: #d8d8d8;
+				background: #f0f0f0;
 				width: 100%;
 				border: 0;
 				margin: 0 0 15px;
 				padding: 10px;
 				box-sizing: border-box;
 				font-size: 12px;
+				border-radius: 6px;
 			}
 
 			// loginForm button

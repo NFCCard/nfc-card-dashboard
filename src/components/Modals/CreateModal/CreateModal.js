@@ -20,7 +20,6 @@ const CreateModal = () => {
 			component: <StepOne onSubmit={handelSubmit} isLoading={isLoading} data={data} />,
 		},
 		{ name: "step 2", component: <StepTwo /> },
-		{ name: "step 3", component: <></> },
 	];
 
 	const handleDismiss = () => {

@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./assets/fonts/font-style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css";
 import "./styles/global.scss";
 import "./api/interceptor.js";
 
