@@ -1,5 +1,5 @@
 import React from "react";
-import { SocialIcon } from "react-social-icons";
+import "./style.scss";
 
 const SocialInput = ({
 	open,
@@ -8,25 +8,48 @@ const SocialInput = ({
 	value,
 	onChange,
 	onSubmit,
-	socialIcon,
+	iconClass,
+	background,
+	svg,
+	inputID,
 }) => {
 	return (
-		<>
+		<div className='position-relative'>
 			<div onClick={handleToggle} className='icon_wrapper'>
-				<SocialIcon network={socialIcon} />
+				<i
+					className={`${iconClass} iconsStyle`}
+					style={{
+						color: "#fff",
+						fontSize: "25px",
+						border: "none",
+						background: `${background}`,
+						padding: "0 5px",
+						borderRadius: "6px",
+						cursor: "pointer",
+					}}
+				>
+					{svg}
+				</i>
 			</div>
 			{open && (
-				<div>
+				<div
+					id={inputID}
+					className='position-absolute'
+					style={{ zIndex: "2", right: "-200%" }}
+				>
 					<input
 						type='text'
 						placeholder={placeholder}
 						value={value}
 						onChange={onChange}
+						className='position-relative socialInput'
 					/>
-					<button onClick={onSubmit}></button>
+					<button onClick={onSubmit} className='position-absolute submit_button'>
+						<i className='far fa-check'></i>
+					</button>
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 

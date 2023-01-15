@@ -1,6 +1,7 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ModalContextProvider from "./context/ModalContextProvider";
+import SocialInputContextProvider from "./context/SocialInputContextProvider";
 import Navigation from "./routes";
 
 function App() {
@@ -9,7 +10,9 @@ function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ModalContextProvider>
-				<Navigation />
+				<SocialInputContextProvider>
+					<Navigation />
+				</SocialInputContextProvider>
 			</ModalContextProvider>
 		</QueryClientProvider>
 	);

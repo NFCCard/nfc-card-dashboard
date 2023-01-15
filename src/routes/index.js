@@ -5,13 +5,13 @@ import Login from "../pages/Login";
 import { Route, Routes, Navigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import { useAuth } from "../hooks/auth/useAuth";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 function Navigation() {
 	const isAuthenticated = useAuth();
 
-	// const token = JSON.parse(Cookies.get("INFO")).access_token;
-	// console.log({ token });
+	const token = JSON.parse(Cookies.get("INFO")).access_token;
+	console.log({ token });
 
 	return (
 		<>

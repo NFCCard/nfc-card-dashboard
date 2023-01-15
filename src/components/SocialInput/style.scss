@@ -1,0 +1,22 @@
+.iconsStyle {
+	-webkit-background-clip: text;
+}
+
+.socialInput {
+	font-family: "Roboto", sans-serif;
+	outline: 0;
+	background: #f0f0f0;
+	border: 1px solid #a5a5af;
+	box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(229, 228, 228, 0.24);
+	padding: 5px;
+	box-sizing: border-box;
+	font-size: 12px;
+	border-radius: 6px;
+}
+
+.submit_button {
+	margin: 0 !important;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}

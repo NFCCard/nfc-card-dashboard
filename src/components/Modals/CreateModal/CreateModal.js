@@ -6,9 +6,11 @@ import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import "./style.scss";
 import useCreateUser from "../../../hooks/core/useCreateUser";
+import { socialContext } from "../../../context/SocialInputContextProvider";
 
 const CreateModal = () => {
 	const { setModalState, modalState } = useContext(ModalContext);
+	const { inputState, setInputState } = useContext(socialContext);
 	const { mutate: createMutate, isLoading, isSuccess, data } = useCreateUser();
 	const handelSubmit = (values) => {
 		createMutate(values);
@@ -23,6 +25,7 @@ const CreateModal = () => {
 	];
 
 	const handleDismiss = () => {
+		setInputState(false);
 		setModalState((prev) => ({
 			...prev,
 			create: false,
