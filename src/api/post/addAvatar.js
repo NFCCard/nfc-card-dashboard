@@ -1,12 +1,17 @@
 import axios from "../axiosInstance";
 import routes from "../routes";
 
-const addAvatar = async (data) => {
+const addAvatar = async (userAvatar) => {
 	const imageFormData = new FormData();
-	imageFormData.append("resource", data);
-	const response = await axios.post(routes.core.addAvatar, imageFormData);
+	console.log({ userAvatar });
+	imageFormData.append("resource", userAvatar);
+	try {
+		const response = await axios.post(routes.core.addAvatar, imageFormData);
 
-	return response.data.data;
+		return response.data.data;
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 export default addAvatar;

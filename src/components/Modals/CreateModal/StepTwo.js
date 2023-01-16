@@ -8,6 +8,7 @@ import useAddAvatar from "../../../hooks/core/useAddAvatar";
 import useUpdateUser from "../../../hooks/core/useUpdateUser";
 import { createFormStepTwoValidaition } from "../../../validations/createFormStepTwoValidaition";
 import SocialInput from "../../SocialInput/SocialInput";
+import Compressor from "compressorjs";
 
 const StepTwo = () => {
 	const { inputState, setInputState } = useContext(socialContext);
@@ -15,7 +16,10 @@ const StepTwo = () => {
 	const { mutate: createMutate } = useAddAvatar();
 	const { mutate: patchMutate, isSuccess, isError } = useUpdateUser();
 	const usersImageId = Cookies.get("NEW_USER_ID");
-	const [image, setImage] = useState("");
+	const [image, setImage] = useState({
+		imageAsFile: "",
+		imageAsBlob: "",
+	});
 
 	const initialValues = {
 		phone: "",
@@ -345,29 +349,24 @@ const StepTwo = () => {
 		},
 	});
 
-	const handleImage = async (e) => {
-		const file = e.target.files[0];
-		const base64 = await convertBase64(file);
-		setImage(base64);
-		createMutate(file);
-	};
+	const handleImage = (e) => {
+		new Compressor(e.target.files[0], {
+			quality: 0.4,
+			convertTypes: ["image/jpg"],
+			success: (result) => {
+				var file = new File([result], result.name);
+				const fileReader = new FileReader();
+				if (file) {
+					fileReader.readAsDataURL(file);
+				}
 
-	const convertBase64 = (file) => {
-		return new Promise((resolve, reject) => {
-			const fileReader = new FileReader();
-			fileReader.readAsDataURL(file);
-
-			fileReader.onload = () => {
-				resolve(fileReader.result);
-			};
-
-			fileReader.onerror = (error) => {
-				reject(error);
-			};
+				fileReader.addEventListener("load", () => {
+					setImage({ imageAsFile: file, imageAsBlob: fileReader.result });
+				});
+				createMutate(file);
+			},
 		});
 	};
-
-	// onSubmit={formik.handleSubmit}
 
 	const [inputIndex, setInputIndex] = useState();
 
@@ -400,9 +399,9 @@ const StepTwo = () => {
 						<div
 							className='preview'
 							id='preview'
-							style={image ? { display: "unset" } : { display: "none" }}
+							style={image.imageAsBlob ? { display: "unset" } : { display: "none" }}
 						>
-							<img src={image} alt='preview' />
+							<img src={image.imageAsBlob} alt='preview' />
 						</div>
 					</div>
 					<label htmlFor={usersImageId} className='mb-3'>
