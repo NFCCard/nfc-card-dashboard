@@ -10,7 +10,7 @@ import { socialContext } from "../../../context/SocialInputContextProvider";
 
 const CreateModal = () => {
 	const { setModalState, modalState } = useContext(ModalContext);
-	const { inputState, setInputState } = useContext(socialContext);
+	const { setInputState } = useContext(socialContext);
 	const { mutate: createMutate, isLoading, isSuccess, data } = useCreateUser();
 	const handelSubmit = (values) => {
 		createMutate(values);

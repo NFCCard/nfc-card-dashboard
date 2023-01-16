@@ -21,20 +21,11 @@ const useLogin = () => {
 				{ expires: day }
 			);
 
-			window.location.replace("/dashboard");
+			setTimeout(() => {
+				window.location.replace("/dashboard");
+			}, 2000);
 		},
 	});
 };
 
 export default useLogin;
-
-// useMutation Example
-
-// useQuery Example
-
-// const useGetProfile = (username , password) => {
-// 	const { data, isLoading, status, refetch } = useQuery("KEY", () =>
-// api.get.getSingleProfile({ username })
-// 	);
-// 	return { data, isLoading, status, refetch };
-// };

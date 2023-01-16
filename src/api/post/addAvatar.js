@@ -1,3 +1,4 @@
+// import Toastify from "../../components/Toastify/Toastify";
 import axios from "../axiosInstance";
 import routes from "../routes";
 
@@ -11,6 +12,7 @@ const addAvatar = async (userAvatar) => {
 		return response.data.data;
 	} catch (error) {
 		console.log(error);
+		// Toastify("error" )
 	}
 };
 

@@ -12,9 +12,9 @@ import Compressor from "compressorjs";
 
 const StepTwo = () => {
 	const { inputState, setInputState } = useContext(socialContext);
-	const { setModalState, modalState } = useContext(ModalContext);
+	const { setModalState } = useContext(ModalContext);
 	const { mutate: createMutate } = useAddAvatar();
-	const { mutate: patchMutate, isSuccess, isError } = useUpdateUser();
+	const { mutate: patchMutate, status, isError } = useUpdateUser();
 	const usersImageId = Cookies.get("NEW_USER_ID");
 	const [image, setImage] = useState({
 		imageAsFile: "",
@@ -331,7 +331,7 @@ const StepTwo = () => {
 			},
 		};
 		patchMutate({ values: formdata, userId: usersImageId });
-		if (isSuccess) {
+		if (status === "idle") {
 			setModalState((prev) => ({
 				...prev,
 				create: false,

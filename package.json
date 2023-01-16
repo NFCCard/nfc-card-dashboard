@@ -27,6 +27,7 @@
 		"react-select": "^5.7.0",
 		"react-spring": "^9.6.1",
 		"react-stepzilla": "^7.0.0",
+		"react-toastify": "^8.0.0",
 		"react-transition-group": "^4.4.5",
 		"sass": "^1.56.1",
 		"styled-components": "^5.3.5",
