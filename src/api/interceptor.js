@@ -13,30 +13,47 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
 	function(response) {
 		if (response.config.url !== "core/users" && response.config.url !== "/core/profiles/1") {
-			console.log(response);
 			if (response.status === 201 && !response.data.data.extension) {
-				Toastify("success", `${response.data.data.username} created`, response.status);
+				Toastify({
+					type: "success",
+					text: `${response.data.data.username} created`,
+					id: response.status,
+				});
 			}
 			if (response.status === 201 && response.data.data.extension) {
-				Toastify("success", "Avatar adedd", response.status);
+				Toastify({ type: "success", text: "Avatar added", id: response.status });
 			}
 			if (response.status === 200 && response.config.method === "delete") {
-				Toastify("success", `${response.data.data.username} deleted`, response.status);
+				Toastify({
+					type: "success",
+					text: `${response.data.data.username} deleted`,
+					id: response.status,
+				});
 			}
 			if (response.status === 200 && response.data.type === "profiles") {
-				Toastify("success", "User Data adedd", response.status);
+				Toastify({ type: "success", text: "User Data added", id: response.status });
 			}
 			if (response.status === 200 && response.data.access_token) {
-				Toastify("success", "login", response.status);
+				if (
+					window.location.href.includes("/login") &&
+					response.data.user.username === "mammadkamalipour"
+				) {
+					Toastify({ type: "success", text: "login", id: response.status });
+				} else {
+					Toastify({
+						type: "error",
+						text: "User name or Password incorect",
+						id: response.status,
+					});
+				}
 			}
 		}
 		return response;
 	},
 	function(error) {
-		console.log(error.response.data.errors);
 		Object.entries(error.response.data.errors).map((messages) => {
 			messages[1].map((err) => {
-				Toastify("error", err, err);
+				Toastify({ type: "error", text: err, id: err });
 			});
 		});
 

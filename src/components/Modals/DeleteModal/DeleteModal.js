@@ -15,6 +15,10 @@ const DeleteModal = ({ modalId, userName, userId }) => {
 	};
 
 	const handleDelete = (userId) => {
+		const deleteBtn = document.getElementById("deleteButton");
+		deleteBtn.disabled = true;
+		deleteBtn.style.backgroundColor = "#0c0c0c5d";
+		deleteBtn.style.cursor = "not-allowed";
 		userDelete(userId);
 	};
 	return (
@@ -24,6 +28,7 @@ const DeleteModal = ({ modalId, userName, userId }) => {
 				<button
 					className='accpetButton text-uppercase'
 					onClick={() => handleDelete(userId)}
+					id='deleteButton'
 				>
 					yes
 				</button>

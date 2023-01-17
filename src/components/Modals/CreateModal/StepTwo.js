@@ -355,6 +355,7 @@ const StepTwo = () => {
 			convertTypes: ["image/jpg"],
 			success: (result) => {
 				var file = new File([result], result.name);
+				console.log({ file });
 				const fileReader = new FileReader();
 				if (file) {
 					fileReader.readAsDataURL(file);
@@ -580,7 +581,9 @@ const StepTwo = () => {
 							})}
 						</div>
 					</div>
-					<button type='submit'>submit</button>
+					<button type='submit' id='submitForm2'>
+						submit
+					</button>
 				</form>
 			</div>
 		</div>

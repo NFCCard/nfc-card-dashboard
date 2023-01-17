@@ -17,7 +17,7 @@ function App() {
 					<ToastContainer
 						theme='dark'
 						position='top-center'
-						// autoClose={1500}
+						autoClose={1500}
 						hideProgressBar={true}
 						newestOnTop={false}
 						closeOnClick

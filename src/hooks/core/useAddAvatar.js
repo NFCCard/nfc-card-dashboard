@@ -12,7 +12,9 @@ const useAddAvatar = () => {
 		},
 		onSuccess: (data, variables, context) => {
 			const userID = Cookies.get("NEW_USER_ID");
-			addMutate({ imageID: data.id, userID });
+			console.log(data);
+			console.log(userID);
+			addMutate({ imageID: data.id, userID: userID });
 		},
 	});
 };

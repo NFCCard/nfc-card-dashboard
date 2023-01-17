@@ -11,19 +11,19 @@ const useLogin = () => {
 			// An error happened!
 		},
 		onSuccess: (data, variables, context) => {
-			Cookies.set(
-				"INFO",
-				JSON.stringify({
-					access_token: data.access_token,
-					username: data.user.username,
-					userId: data.user.id,
-				}),
-				{ expires: day }
-			);
-
-			setTimeout(() => {
+			console.log(data);
+			if (data.user.username === "mammadkamalipour") {
+				Cookies.set(
+					"INFO",
+					JSON.stringify({
+						access_token: data.access_token,
+						username: data.user.username,
+						userId: data.user.id,
+					}),
+					{ expires: day }
+				);
 				window.location.replace("/dashboard");
-			}, 2000);
+			}
 		},
 	});
 };
