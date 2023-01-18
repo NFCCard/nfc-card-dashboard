@@ -1,5 +1,4 @@
 import { useFormik } from "formik";
-import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { ModalContext } from "../../../context/ModalContextProvider";
@@ -9,13 +8,15 @@ import useUpdateUser from "../../../hooks/core/useUpdateUser";
 import { createFormStepTwoValidaition } from "../../../validations/createFormStepTwoValidaition";
 import SocialInput from "../../SocialInput/SocialInput";
 import Compressor from "compressorjs";
+import { UserDataContext } from "../../../context/UserDataContextProvider";
 
 const StepTwo = () => {
 	const { inputState, setInputState } = useContext(socialContext);
+	const { userData } = useContext(UserDataContext);
 	const { setModalState } = useContext(ModalContext);
 	const { mutate: createMutate } = useAddAvatar();
-	const { mutate: patchMutate, status, isError } = useUpdateUser();
-	const usersImageId = Cookies.get("NEW_USER_ID");
+	const { mutate: patchMutate, status } = useUpdateUser();
+	const usersImageId = userData.userProfileId;
 	const [image, setImage] = useState({
 		imageAsFile: "",
 		imageAsBlob: "",
@@ -336,8 +337,6 @@ const StepTwo = () => {
 				...prev,
 				create: false,
 			}));
-		} else {
-			console.log({ isError });
 		}
 	};
 
@@ -355,7 +354,6 @@ const StepTwo = () => {
 			convertTypes: ["image/jpg"],
 			success: (result) => {
 				var file = new File([result], result.name);
-				console.log({ file });
 				const fileReader = new FileReader();
 				if (file) {
 					fileReader.readAsDataURL(file);

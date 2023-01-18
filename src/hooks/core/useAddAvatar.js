@@ -1,9 +1,11 @@
-import Cookies from "js-cookie";
+import { useContext } from "react";
 import { useMutation } from "react-query";
 import postRequest from "../../api/post";
+import { UserDataContext } from "../../context/UserDataContextProvider";
 import useAppendAvatar from "./useAppendAvatar";
 
 const useAddAvatar = () => {
+	const { userData } = useContext(UserDataContext);
 	const { mutate: addMutate } = useAppendAvatar();
 
 	return useMutation((value) => postRequest.addAvatar(value), {
@@ -11,9 +13,8 @@ const useAddAvatar = () => {
 			// An error happened!
 		},
 		onSuccess: (data, variables, context) => {
-			const userID = Cookies.get("NEW_USER_ID");
-			console.log(data);
-			console.log(userID);
+			const userID = userData.userProfileId;
+
 			addMutate({ imageID: data.id, userID: userID });
 		},
 	});

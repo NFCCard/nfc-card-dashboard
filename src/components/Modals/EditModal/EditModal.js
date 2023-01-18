@@ -4,14 +4,15 @@ import { ModalContext } from "../../../context/ModalContextProvider";
 import { socialContext } from "../../../context/SocialInputContextProvider";
 import useAddAvatar from "../../../hooks/core/useAddAvatar";
 import useUpdateUser from "../../../hooks/core/useUpdateUser";
-import Cookies from "js-cookie";
 import { useFormik } from "formik";
 import { createFormStepTwoValidaition } from "../../../validations/createFormStepTwoValidaition";
 import Compressor from "compressorjs";
 import SocialInput from "../../SocialInput/SocialInput";
+import { UserDataContext } from "../../../context/UserDataContextProvider";
 
 const EditModal = ({ userId }) => {
 	const { setModalState, modalState } = useContext(ModalContext);
+	const { userData } = useContext(UserDataContext);
 	const handleDismiss = () => {
 		setModalState((prev) => ({
 			...prev,
@@ -21,8 +22,8 @@ const EditModal = ({ userId }) => {
 
 	const { inputState, setInputState } = useContext(socialContext);
 	const { mutate: createMutate } = useAddAvatar();
-	const { mutate: patchMutate, status, isError } = useUpdateUser();
-	const usersImageId = Cookies.get("NEW_USER_ID");
+	const { mutate: patchMutate, status } = useUpdateUser();
+	const usersImageId = userData.userProfileId;
 	const [image, setImage] = useState({
 		imageAsFile: "",
 		imageAsBlob: "",
@@ -343,8 +344,6 @@ const EditModal = ({ userId }) => {
 				...prev,
 				create: false,
 			}));
-		} else {
-			console.log({ isError });
 		}
 	};
 
@@ -362,7 +361,6 @@ const EditModal = ({ userId }) => {
 			convertTypes: ["image/jpg"],
 			success: (result) => {
 				var file = new File([result], result.name);
-				console.log({ file });
 				const fileReader = new FileReader();
 				if (file) {
 					fileReader.readAsDataURL(file);

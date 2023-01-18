@@ -11,7 +11,6 @@ const useLogin = () => {
 			// An error happened!
 		},
 		onSuccess: (data, variables, context) => {
-			console.log(data);
 			if (data.user.username === "mammadkamalipour") {
 				Cookies.set(
 					"INFO",

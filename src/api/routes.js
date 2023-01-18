@@ -10,6 +10,7 @@ const core = {
 	addAvatar: "/core/upload/resource",
 	appendAvatar: "/core/profiles/",
 	updateUser: "/core/profiles/",
+	viewById: "/core/users/",
 };
 
 const routes = { auth, core };
