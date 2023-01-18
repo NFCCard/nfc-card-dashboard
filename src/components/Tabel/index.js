@@ -102,7 +102,7 @@ const Table = ({ content, isLoading }) => {
 													>
 														<FontAwesomeIcon
 															icon={solid("edit")}
-															color='#fff'
+															color='#000'
 														/>
 													</button>
 													<button
@@ -111,7 +111,7 @@ const Table = ({ content, isLoading }) => {
 													>
 														<FontAwesomeIcon
 															icon={solid("trash")}
-															color='#fff'
+															color='#000'
 														/>
 													</button>
 												</div>
@@ -121,7 +121,11 @@ const Table = ({ content, isLoading }) => {
 								})}
 							</tbody>
 						</table>
-						<EditModal userId={user && user.id} modalId={user && user.id} />
+						<EditModal
+							userId={user && user.profile.id}
+							modalId={user && user.profile.id}
+							userData={user}
+						/>
 						<DeleteModal
 							userId={user && user.id}
 							userName={user && user.username}

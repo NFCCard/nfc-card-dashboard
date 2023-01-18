@@ -24,7 +24,7 @@ const SideBar = () => {
 				<ul className='list-unstyled '>
 					{buttonData.map((button, index) => {
 						return (
-							<li className='list-item text-uppercase' key={index}>
+							<li className='list-item text-capitalize' key={index}>
 								<SideButton
 									key={index}
 									ButtonUrl={button.buttonUrl}

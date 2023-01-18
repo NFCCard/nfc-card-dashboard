@@ -10,9 +10,13 @@ import Compressor from "compressorjs";
 import SocialInput from "../../SocialInput/SocialInput";
 import { UserDataContext } from "../../../context/UserDataContextProvider";
 
-const EditModal = ({ userId }) => {
+const EditModal = ({ userId, userData }) => {
+	if (userData) {
+		console.log({ userData });
+	}
+
+	const { setUserData } = useContext(UserDataContext);
 	const { setModalState, modalState } = useContext(ModalContext);
-	const { userData } = useContext(UserDataContext);
 	const handleDismiss = () => {
 		setModalState((prev) => ({
 			...prev,
@@ -23,19 +27,20 @@ const EditModal = ({ userId }) => {
 	const { inputState, setInputState } = useContext(socialContext);
 	const { mutate: createMutate } = useAddAvatar();
 	const { mutate: patchMutate, status } = useUpdateUser();
-	const usersImageId = userData.userProfileId;
 	const [image, setImage] = useState({
 		imageAsFile: "",
 		imageAsBlob: "",
 	});
 
 	const initialValues = {
-		phone: "",
-		email: "",
-		perisanName: "",
-		englishName: "",
-		description_fa: "",
-		description_en: "",
+		phone: userData ? userData.profile.phone : "",
+		email: userData ? userData.profile.email : "",
+		perisanName: userData && userData.profile.first_name ? userData.profile.first_name.fa : "",
+		englishName: userData && userData.profile.first_name ? userData.profile.first_name.en : "",
+		description_fa:
+			userData && userData.profile.description ? userData.profile.description.fa : "",
+		description_en:
+			userData && userData.profile.description ? userData.profile.description.en : "",
 	};
 
 	const socialMedias = [
@@ -338,7 +343,7 @@ const EditModal = ({ userId }) => {
 				fa: values.description_fa,
 			},
 		};
-		patchMutate({ values: formdata, userId: usersImageId });
+		patchMutate({ values: formdata, userId: userId });
 		if (status === "idle") {
 			setModalState((prev) => ({
 				...prev,
@@ -356,6 +361,9 @@ const EditModal = ({ userId }) => {
 	});
 
 	const handleImage = (e) => {
+		setUserData({
+			userProfileId: userId,
+		});
 		new Compressor(e.target.files[0], {
 			quality: 0.4,
 			convertTypes: ["image/jpg"],
@@ -396,27 +404,29 @@ const EditModal = ({ userId }) => {
 					<form action='submit' className='Form' onSubmit={formik.handleSubmit}>
 						<div className='input_wrapper  position-relative'>
 							{/* ---------------- image input -------------------------*/}
-							<input
-								type='file'
-								accept='image/*'
-								id={usersImageId}
-								className='imageInput'
-								onChange={(e) => handleImage(e)}
-							/>
-							<div
-								className='preview'
-								id='preview'
-								style={
-									image.imageAsBlob ? { display: "unset" } : { display: "none" }
-								}
-							>
-								<img src={image.imageAsBlob} alt='preview' />
+							<div className='avatarInput'>
+								<input
+									type='file'
+									accept='image/*'
+									id={userId}
+									className='imageInput'
+									onChange={(e) => handleImage(e)}
+								/>
+								<i className='fa fa-edit edit_icon'></i>
+							</div>
+							<div className='preview' id='preview'>
+								<img
+									src={
+										userData && userData.profile.resource
+											? userData.profile.resource.url
+											: image.imageAsBlob
+									}
+									alt='preview'
+								/>
 							</div>
 						</div>
-						<label htmlFor={usersImageId} className='mb-3'>
-							{!image
-								? "Choose your avatar from your file"
-								: "Your avatar append to your profile"}
+						<label htmlFor={userId} className='mb-3'>
+							Choose your avatar from your file
 						</label>
 						{/* ---------------- image input -------------------------*/}
 						<div className='d-flex  flex-column w-75 '>
@@ -425,6 +435,7 @@ const EditModal = ({ userId }) => {
 									{/* ---------------- phone input -------------------------*/}
 									<label htmlFor='phone'>Phone number</label>
 									<input
+										value={initialValues.phone}
 										type='text'
 										id='phone'
 										className='textInput'
@@ -446,6 +457,7 @@ const EditModal = ({ userId }) => {
 									{/* ---------------- email input -------------------------*/}
 									<label htmlFor='email'>Email</label>
 									<input
+										value={initialValues.email}
 										type='text'
 										id='email'
 										className='textInput'
@@ -469,6 +481,7 @@ const EditModal = ({ userId }) => {
 									{/* ---------------- persian name input -------------------------*/}
 									<label htmlFor='PersianName'>Persian name</label>
 									<input
+										value={initialValues.perisanName}
 										type='text'
 										id='PersianName'
 										className='textInput'
@@ -494,6 +507,7 @@ const EditModal = ({ userId }) => {
 									{/* ---------------- english name input -------------------------*/}
 									<label htmlFor='EnglishName'>English name</label>
 									<input
+										value={initialValues.englishName}
 										type='text'
 										id='EnglishName'
 										className='textInput'
@@ -519,6 +533,7 @@ const EditModal = ({ userId }) => {
 									{/* ---------------- en description input -------------------------*/}
 									<label htmlFor='enDescription'>English description</label>
 									<textarea
+										value={initialValues.description_en}
 										type='text'
 										id='enDescription'
 										className='textInput'
@@ -543,6 +558,7 @@ const EditModal = ({ userId }) => {
 									{/* ---------------- fa description input -------------------------*/}
 									<label htmlFor='faDescription'>Persian description</label>
 									<textarea
+										value={initialValues.description_fa}
 										type='text'
 										id='faDescription'
 										className='textInput'

@@ -2,6 +2,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	max-height: 80vh;
 
 	.icon_wrapper {
 		a {
@@ -12,6 +13,7 @@
 
 	.Form_wrapper {
 		width: 500px;
+		height: 100%;
 
 		.Form {
 			position: relative;
@@ -31,6 +33,21 @@
 				margin-bottom: 1rem;
 			}
 
+			.avatarInput {
+				position: absolute;
+				background: transparent;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+			}
+
+			.edit_icon {
+				position: absolute;
+				bottom: 0;
+				right: 0;
+			}
+
 			.imageInput {
 				position: absolute;
 				top: 0;
@@ -38,6 +55,8 @@
 				bottom: 0;
 				right: 0;
 				opacity: 0;
+				z-index: 2;
+				border-radius: 100%;
 			}
 
 			.preview {
@@ -46,6 +65,8 @@
 				left: 0;
 				bottom: 0;
 				right: 0;
+				border-radius: 100%;
+				mix-blend-mode: overlay;
 
 				width: 70px !important;
 				height: 70px !important;
@@ -75,8 +96,8 @@
 				font-family: "Roboto", sans-serif;
 				text-transform: capitalize;
 				outline: 0;
-				background-color: #19307e;
-				box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(229, 228, 228, 0.24);
+				background-color: #f98b2f;
+				// box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(229, 228, 228, 0.24);
 				transition: color 0.2s ease, background-color 0.2s ease-in-out;
 				border: 0;
 				padding: 4px 15px;
@@ -85,11 +106,12 @@
 				border-radius: 6px;
 				cursor: pointer;
 				margin-top: 1rem;
+				margin-bottom: 1rem;
 
 				&:hover,
 				:active,
 				:focus {
-					background: #12225a;
+					background: #b6611b;
 				}
 			}
 		}

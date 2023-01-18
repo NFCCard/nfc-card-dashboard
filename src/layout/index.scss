@@ -17,7 +17,7 @@
 }
 
 .holy-grail__left {
-	background-color: #253544;
+	background-color: #f98b2f;
 	box-shadow: 7px 0 9px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 	width: 15%;
 	position: fixed;
@@ -53,8 +53,9 @@
 .header {
 	align-self: flex-end;
 	width: 85%;
-	background-color: #fff;
-	box-shadow: 0px 1px 1px 0 rgba(170, 167, 167, 0.2), 0 0px 5px 0 rgba(198, 198, 198, 0.25);
+	background-color: #20201d;
+	color: white;
+	// box-shadow: 0px 1px 1px 0 rgba(170, 167, 167, 0.2), 0 0px 5px 0 rgba(198, 198, 198, 0.25);
 	z-index: 1;
 	margin: 0 !important;
 }

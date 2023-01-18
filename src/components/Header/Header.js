@@ -25,14 +25,14 @@ const Header = () => {
 			{location.pathname === "/users" && (
 				<div className='buttonWrapper'>
 					<button onClick={() => openCreateModalHandler()} className='Button_Primary'>
-						<FontAwesomeIcon icon={solid("add")} color='#fff' />
+						<FontAwesomeIcon icon={solid("add")} color='#000' />
 						Create
 					</button>
 				</div>
 			)}
 			<div className='header_title'>
 				<div className='logoWrapper'>
-					<img src={logout} alt='logout' onClick={() => logOuthandler()} />
+					<i className='fas fa-sign-out' onClick={() => logOuthandler()}></i>
 				</div>
 				<div className='avatar-name d-flex  flex-column '>
 					<span>{data ? data.data.first_name.en : ""}</span>
