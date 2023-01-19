@@ -6,8 +6,11 @@ const useUpdateUser = () => {
 	const { refetch } = useGetUserList();
 
 	return useMutation((value) => patchRequest.updateUser(value), {
-		onError: (error, variables, context) => {},
+		onError: (error, variables, context) => {
+			console.log(error);
+		},
 		onSuccess: (data, variables, context) => {
+			console.log(data);
 			refetch();
 		},
 	});

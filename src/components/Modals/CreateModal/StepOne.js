@@ -5,7 +5,7 @@ import { createFormStepOnValidaition } from "../../../validations/createFormStep
 const StepOne = ({ onSubmit, isLoading }) => {
 	const initialValues = {
 		username: "",
-		role_id: 1,
+		role_id: 2,
 		password: "",
 		password_confirmation: "",
 	};

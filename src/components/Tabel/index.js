@@ -135,7 +135,7 @@ const Table = ({ content, isLoading }) => {
 					</div>
 				</>
 			) : (
-				<h2>loading</h2>
+				<h2 className='text-light'>loading</h2>
 			)}
 		</>
 	);

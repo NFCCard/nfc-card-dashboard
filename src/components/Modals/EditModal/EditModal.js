@@ -5,24 +5,49 @@ import { socialContext } from "../../../context/SocialInputContextProvider";
 import useAddAvatar from "../../../hooks/core/useAddAvatar";
 import useUpdateUser from "../../../hooks/core/useUpdateUser";
 import { useFormik } from "formik";
-import { createFormStepTwoValidaition } from "../../../validations/createFormStepTwoValidaition";
+import { editValidations } from "../../../validations/editValidations";
 import Compressor from "compressorjs";
 import SocialInput from "../../SocialInput/SocialInput";
 import { UserDataContext } from "../../../context/UserDataContextProvider";
+import { useEffect } from "react";
 
 const EditModal = ({ userId, userData }) => {
-	if (userData) {
-		console.log({ userData });
-	}
-
 	const { setUserData } = useContext(UserDataContext);
 	const { setModalState, modalState } = useContext(ModalContext);
+	const [initialValues, setInitialValues] = useState({
+		phone: "",
+		email: "",
+		perisanFirstName: "",
+		persianLastName: "",
+		englishFirstName: "",
+		englishLastName: "",
+		description_fa: "",
+		description_en: "",
+	});
 	const handleDismiss = () => {
 		setModalState((prev) => ({
 			...prev,
 			edit: false,
 		}));
 	};
+
+	useEffect(() => {
+		if (userData) {
+			console.log(userData);
+			formik.setValues({
+				phone: userData.profile.phone,
+				email: userData.profile.email,
+				perisanFirstName: userData.profile.perisanFirstName,
+				persianLastName: userData.profile.persianLastName,
+				englishFirstName: userData.profile.englishFirstName,
+				englishLastName: userData.profile.englishLastName,
+				description_fa: userData.profile.description.fa,
+				description_en: userData.profile.description.en,
+			});
+		}
+
+		console.log(formik.values);
+	}, [userData]);
 
 	const { inputState, setInputState } = useContext(socialContext);
 	const { mutate: createMutate } = useAddAvatar();
@@ -31,17 +56,6 @@ const EditModal = ({ userId, userData }) => {
 		imageAsFile: "",
 		imageAsBlob: "",
 	});
-
-	const initialValues = {
-		phone: userData ? userData.profile.phone : "",
-		email: userData ? userData.profile.email : "",
-		perisanName: userData && userData.profile.first_name ? userData.profile.first_name.fa : "",
-		englishName: userData && userData.profile.first_name ? userData.profile.first_name.en : "",
-		description_fa:
-			userData && userData.profile.description ? userData.profile.description.fa : "",
-		description_en:
-			userData && userData.profile.description ? userData.profile.description.en : "",
-	};
 
 	const socialMedias = [
 		{
@@ -327,34 +341,34 @@ const EditModal = ({ userId, userData }) => {
 		if (values.website) socialMediaList.push({ social: "website", url: values.website });
 
 		const formdata = {
-			phone: values.phone,
-			email: values.email,
+			phone: formik.values.phone,
+			email: formik.values.email,
 			socials: socialMediaList,
 			first_name: {
-				en: "alireza",
-				fa: "علیرضا",
+				en: formik.values.englishFirstName,
+				fa: formik.values.perisanFirstName,
 			},
 			last_name: {
-				en: "alinezhad",
-				fa: "علینژاد",
+				en: formik.values.englishLastName,
+				fa: formik.values.persianLastName,
 			},
 			description: {
-				en: values.description_en,
-				fa: values.description_fa,
+				en: formik.values.description_en,
+				fa: formik.values.description_fa,
 			},
 		};
 		patchMutate({ values: formdata, userId: userId });
 		if (status === "idle") {
 			setModalState((prev) => ({
 				...prev,
-				create: false,
+				edit: false,
 			}));
 		}
 	};
 
 	const formik = useFormik({
 		initialValues: initialValues,
-		validationSchema: createFormStepTwoValidaition,
+		validationSchema: editValidations,
 		onSubmit: (values) => {
 			handleSubmit(values);
 		},
@@ -399,220 +413,291 @@ const EditModal = ({ userId, userData }) => {
 
 	return (
 		<ModalCore open={modalState.edit} onDismiss={handleDismiss}>
-			<div className='Step '>
-				<div className='Form_wrapper  user-select-none '>
-					<form action='submit' className='Form' onSubmit={formik.handleSubmit}>
-						<div className='input_wrapper  position-relative'>
+			{userData ? (
+				<div className='Step d-flex flex-column'>
+					<span className='text-center mb-2'> User name : {userData.username}</span>
+					<div className='Form_wrapper  user-select-none '>
+						<form action='submit' className='Form' onSubmit={formik.handleSubmit}>
+							<div className='input_wrapper  position-relative'>
+								{/* ---------------- image input -------------------------*/}
+								<div className='avatarInput'>
+									<input
+										type='file'
+										accept='image/*'
+										id={userId}
+										className='imageInput'
+										onChange={(e) => handleImage(e)}
+									/>
+									<i className='fa fa-edit edit_icon'></i>
+								</div>
+								<div className='preview' id='preview'>
+									<img
+										src={
+											userData && userData.profile.resource
+												? userData.profile.resource.url
+												: image.imageAsBlob
+										}
+										alt='preview'
+									/>
+								</div>
+							</div>
+							<label htmlFor={userId} className='mb-3'>
+								Choose your avatar from your file
+							</label>
 							{/* ---------------- image input -------------------------*/}
-							<div className='avatarInput'>
-								<input
-									type='file'
-									accept='image/*'
-									id={userId}
-									className='imageInput'
-									onChange={(e) => handleImage(e)}
-								/>
-								<i className='fa fa-edit edit_icon'></i>
-							</div>
-							<div className='preview' id='preview'>
-								<img
-									src={
-										userData && userData.profile.resource
-											? userData.profile.resource.url
-											: image.imageAsBlob
-									}
-									alt='preview'
-								/>
-							</div>
-						</div>
-						<label htmlFor={userId} className='mb-3'>
-							Choose your avatar from your file
-						</label>
-						{/* ---------------- image input -------------------------*/}
-						<div className='d-flex  flex-column w-75 '>
-							<div className='d-flex col-12 gap-3 justify-content-center align-items-center'>
-								<div className='d-flex flex-column w-100'>
-									{/* ---------------- phone input -------------------------*/}
-									<label htmlFor='phone'>Phone number</label>
-									<input
-										value={initialValues.phone}
-										type='text'
-										id='phone'
-										className='textInput'
-										autoComplete='off'
-										onChange={(e) => {
-											formik.setValues({
-												...formik.values,
-												phone: e.target.value,
-											});
-										}}
-										onFocus={() => formik.setTouched({ phone: true })}
-									/>
-									{formik.errors.phone && formik.touched.phone && (
-										<span className='usernameError'>{formik.errors.phone}</span>
-									)}
-									{/* ---------------- phone input -------------------------*/}
-								</div>
-								<div className='d-flex flex-column w-100'>
-									{/* ---------------- email input -------------------------*/}
-									<label htmlFor='email'>Email</label>
-									<input
-										value={initialValues.email}
-										type='text'
-										id='email'
-										className='textInput'
-										autoComplete='off'
-										onChange={(e) => {
-											formik.setValues({
-												...formik.values,
-												email: e.target.value,
-											});
-										}}
-										onFocus={() => formik.setTouched({ email: true })}
-									/>
-									{formik.errors.email && formik.touched.email && (
-										<span className='usernameError'>{formik.errors.email}</span>
-									)}
-									{/* ---------------- email input -------------------------*/}
-								</div>
-							</div>
-							<div className=' gap-3 justify-content-center align-items-center'>
-								<div className=''>
-									{/* ---------------- persian name input -------------------------*/}
-									<label htmlFor='PersianName'>Persian name</label>
-									<input
-										value={initialValues.perisanName}
-										type='text'
-										id='PersianName'
-										className='textInput'
-										autoComplete='off'
-										onChange={(e) => {
-											formik.setValues({
-												...formik.values,
-												perisanName: e.target.value,
-											});
-										}}
-										onFocus={() => formik.setTouched({ perisanName: true })}
-									/>
-									{formik.errors.perisanName && formik.touched.perisanName && (
-										<span className='usernameError'>
-											{formik.errors.perisanName}
-										</span>
-									)}
-									{/* ---------------- persian name input -------------------------*/}
-								</div>
-							</div>
-							<div className=' gap-3 justify-content-center align-items-center'>
-								<div className=''>
-									{/* ---------------- english name input -------------------------*/}
-									<label htmlFor='EnglishName'>English name</label>
-									<input
-										value={initialValues.englishName}
-										type='text'
-										id='EnglishName'
-										className='textInput'
-										autoComplete='off'
-										onChange={(e) => {
-											formik.setValues({
-												...formik.values,
-												englishName: e.target.value,
-											});
-										}}
-										onFocus={() => formik.setTouched({ englishName: true })}
-									/>
-									{formik.errors.englishName && formik.touched.englishName && (
-										<span className='usernameError'>
-											{formik.errors.englishName}
-										</span>
-									)}
-									{/* ---------------- english name input -------------------------*/}
-								</div>
-							</div>
-							<div className='d-flex col-12 gap-3 justify-content-center align-items-center'>
-								<div className='d-flex flex-column w-100'>
-									{/* ---------------- en description input -------------------------*/}
-									<label htmlFor='enDescription'>English description</label>
-									<textarea
-										value={initialValues.description_en}
-										type='text'
-										id='enDescription'
-										className='textInput'
-										autoComplete='off'
-										onChange={(e) => {
-											formik.setValues({
-												...formik.values,
-												description_en: e.target.value,
-											});
-										}}
-										onFocus={() => formik.setTouched({ description_en: true })}
-									/>
-									{formik.errors.description_en &&
-										formik.touched.description_en && (
-											<span className='usernameError'>
-												{formik.errors.description_en}
-											</span>
-										)}
-									{/* ---------------- en description input -------------------------*/}
-								</div>
-								<div className='d-flex flex-column w-100'>
-									{/* ---------------- fa description input -------------------------*/}
-									<label htmlFor='faDescription'>Persian description</label>
-									<textarea
-										value={initialValues.description_fa}
-										type='text'
-										id='faDescription'
-										className='textInput'
-										autoComplete='off'
-										onChange={(e) => {
-											formik.setValues({
-												...formik.values,
-												description_fa: e.target.value,
-											});
-										}}
-										onFocus={() => formik.setTouched({ description_fa: true })}
-									/>
-									{formik.errors.description_fa &&
-										formik.touched.description_fa && (
-											<span className='usernameError'>
-												{formik.errors.description_fa}
-											</span>
-										)}
-									{/* ---------------- fa description input -------------------------*/}
-								</div>
-							</div>
-							<div className='d-flex flex-wrap w-100 justify-content-center align-items-center mb-4 mt-4 gap-1'>
-								{socialMedias.map((social, index) => {
-									return (
-										<SocialInput
-											inputID={index && inputIndex}
-											open={social.state}
-											handleToggle={() => handleToggle(social.name, index)}
-											name={social.name}
-											key={index}
-											iconClass={social.icon}
-											background={
-												social.state ? social.background : social.overlay
-											}
-											svg={social.state ? social.svg : social.svgOverlay}
-											onSubmit={() => dissmis(social.name, index)}
+							<div className='d-flex  flex-column w-75 '>
+								<div className='d-flex col-12 gap-3 justify-content-center align-items-center'>
+									<div className='d-flex flex-column w-100 position-relative'>
+										{/* ---------------- phone input -------------------------*/}
+										<label htmlFor='phone'>Phone number</label>
+										<input
+											value={formik.values.phone}
+											type='text'
+											id='phone'
+											className='textInput '
+											autoComplete='off'
 											onChange={(e) => {
-												const nameOfSocial = social.name;
 												formik.setValues({
 													...formik.values,
-													[nameOfSocial]: e.target.value,
+													phone: e.target.value,
 												});
 											}}
+											onFocus={() => formik.setTouched({ phone: true })}
 										/>
-									);
-								})}
+										{formik.errors.phone && formik.touched.phone && (
+											<span className='usernameError'>
+												{formik.errors.phone}
+											</span>
+										)}
+										{/* ---------------- phone input -------------------------*/}
+									</div>
+									<div className='d-flex flex-column w-100 position-relative'>
+										{/* ---------------- email input -------------------------*/}
+										<label htmlFor='email'>Email</label>
+										<input
+											value={formik.values.email}
+											type='text'
+											id='email'
+											className='textInput'
+											autoComplete='off'
+											onChange={(e) => {
+												formik.setValues({
+													...formik.values,
+													email: e.target.value,
+												});
+											}}
+											onFocus={() => formik.setTouched({ email: true })}
+										/>
+										{formik.errors.email && formik.touched.email && (
+											<span className='usernameError'>
+												{formik.errors.email}
+											</span>
+										)}
+										{/* ---------------- email input -------------------------*/}
+									</div>
+								</div>
+								<div className=' gap-3 justify-content-center align-items-center position-relative'>
+									<div className=''>
+										{/* ---------------- persian name input -------------------------*/}
+										<label htmlFor='PersianName'>Persian first name</label>
+										<input
+											value={formik.values.perisanFirstName}
+											type='text'
+											id='PersianName'
+											className='textInput'
+											autoComplete='off'
+											onChange={(e) => {
+												formik.setValues({
+													...formik.values,
+													perisanFirstName: e.target.value,
+												});
+											}}
+											onFocus={() =>
+												formik.setTouched({ perisanFirstName: true })
+											}
+										/>
+										{formik.errors.perisanFirstName &&
+											formik.touched.perisanFirstName && (
+												<span className='usernameError'>
+													{formik.errors.perisanFirstName}
+												</span>
+											)}
+										{/* ---------------- persian name input -------------------------*/}
+										{/* ---------------- persian last input -------------------------*/}
+										<label htmlFor='PersianLastName'>Persian last name</label>
+										<input
+											value={formik.values.persianLastName}
+											type='text'
+											id='PersianLastName'
+											className='textInput'
+											autoComplete='off'
+											onChange={(e) => {
+												formik.setValues({
+													...formik.values,
+													persianLastName: e.target.value,
+												});
+											}}
+											onFocus={() =>
+												formik.setTouched({ persianLastName: true })
+											}
+										/>
+										{formik.errors.persianLastName &&
+											formik.touched.persianLastName && (
+												<span className='usernameError'>
+													{formik.errors.persianLastName}
+												</span>
+											)}
+										{/* ---------------- persian last input -------------------------*/}
+									</div>
+								</div>
+								<div className=' gap-3 justify-content-center align-items-center '>
+									<div className='position-relative'>
+										{/* ---------------- english first name input -------------------------*/}
+										<label htmlFor='EnglishFirstName'>English first name</label>
+										<input
+											value={formik.values.englishFirstName}
+											type='text'
+											id='EnglishFirstName'
+											className='textInput'
+											autoComplete='off'
+											onChange={(e) => {
+												formik.setValues({
+													...formik.values,
+													englishFirstName: e.target.value,
+												});
+											}}
+											onFocus={() =>
+												formik.setTouched({ englishFirstName: true })
+											}
+										/>
+										{formik.errors.englishFirstName &&
+											formik.touched.englishFirstName && (
+												<span className='usernameError'>
+													{formik.errors.englishFirstName}
+												</span>
+											)}
+										{/* ---------------- english first name input -------------------------*/}
+										{/* ---------------- english last name input -------------------------*/}
+										<label htmlFor='EnglishLastName'>English last name</label>
+										<input
+											value={formik.values.englishLastName}
+											type='text'
+											id='EnglishLastName'
+											className='textInput'
+											autoComplete='off'
+											onChange={(e) => {
+												formik.setValues({
+													...formik.values,
+													englishLastName: e.target.value,
+												});
+											}}
+											onFocus={() =>
+												formik.setTouched({ englishLastName: true })
+											}
+										/>
+										{formik.errors.englishLastName &&
+											formik.touched.englishLastName && (
+												<span className='usernameError'>
+													{formik.errors.englishLastName}
+												</span>
+											)}
+										{/* ---------------- english last name input -------------------------*/}
+									</div>
+								</div>
+								<div className='d-flex col-12 gap-3 justify-content-center align-items-center '>
+									<div className='d-flex flex-column w-100 position-relative'>
+										{/* ---------------- en description input -------------------------*/}
+										<label htmlFor='enDescription'>English description</label>
+										<textarea
+											value={formik.values.description_en}
+											type='text'
+											id='enDescription'
+											className='textInput'
+											autoComplete='off'
+											onChange={(e) => {
+												formik.setValues({
+													...formik.values,
+													description_en: e.target.value,
+												});
+											}}
+											onFocus={() =>
+												formik.setTouched({ description_en: true })
+											}
+										/>
+										{formik.errors.description_en &&
+											formik.touched.description_en && (
+												<span className='usernameError'>
+													{formik.errors.description_en}
+												</span>
+											)}
+										{/* ---------------- en description input -------------------------*/}
+									</div>
+									<div className='d-flex flex-column w-100 position-relative'>
+										{/* ---------------- fa description input -------------------------*/}
+										<label htmlFor='faDescription'>Persian description</label>
+										<textarea
+											value={formik.values.description_fa}
+											type='text'
+											id='faDescription'
+											className='textInput'
+											autoComplete='off'
+											onChange={(e) => {
+												formik.setValues({
+													...formik.values,
+													description_fa: e.target.value,
+												});
+											}}
+											onFocus={() =>
+												formik.setTouched({ description_fa: true })
+											}
+										/>
+										{formik.errors.description_fa &&
+											formik.touched.description_fa && (
+												<span className='usernameError'>
+													{formik.errors.description_fa}
+												</span>
+											)}
+										{/* ---------------- fa description input -------------------------*/}
+									</div>
+								</div>
+								<div className='d-flex flex-wrap w-100 justify-content-center align-items-center mb-4 mt-4 gap-1'>
+									{socialMedias.map((social, index) => {
+										return (
+											<SocialInput
+												inputID={index && inputIndex}
+												open={social.state}
+												handleToggle={() =>
+													handleToggle(social.name, index)
+												}
+												name={social.name}
+												key={index}
+												iconClass={social.icon}
+												background={
+													social.state
+														? social.background
+														: social.overlay
+												}
+												svg={social.state ? social.svg : social.svgOverlay}
+												onSubmit={() => dissmis(social.name, index)}
+												onChange={(e) => {
+													const nameOfSocial = social.name;
+													formik.setValues({
+														...formik.values,
+														[nameOfSocial]: e.target.value,
+													});
+												}}
+											/>
+										);
+									})}
+								</div>
 							</div>
-						</div>
-						<button type='submit' id='submitForm2'>
-							submit
-						</button>
-					</form>
+							<button type='submit' id='submitForm2'>
+								submit
+							</button>
+						</form>
+					</div>
 				</div>
-			</div>
+			) : null}
 		</ModalCore>
 	);
 };

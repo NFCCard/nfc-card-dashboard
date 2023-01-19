@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { logOuthandler } from "../../helpers/function";
 import useViewUsers from "../../hooks/core/useViewUsers";
 import "./style.scss";
-import logout from "../../assets/images/logOut.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { ModalContext } from "../../context/ModalContextProvider";
 import { useLocation } from "react-router-dom";
+import avatar from "../../assets/images/user.png";
 
 const Header = () => {
 	const { setModalState } = useContext(ModalContext);
@@ -39,7 +39,14 @@ const Header = () => {
 					<span>{data ? data.data.last_name.en : ""}</span>
 				</div>
 				<div className='avatar'>
-					{data ? <img src={data.data.resource.url} alt='avatar' /> : ""}
+					{data ? (
+						<img
+							src={data.data.resource ? data.data.resource.url : avatar}
+							alt='avatar'
+						/>
+					) : (
+						""
+					)}
 				</div>
 			</div>
 		</>
