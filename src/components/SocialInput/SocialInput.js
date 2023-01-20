@@ -1,4 +1,8 @@
 import React from "react";
+import { useContext } from "react";
+import { useRef } from "react";
+import { socialContext } from "../../context/SocialInputContextProvider";
+import { useOnClickOutSide } from "../../hooks/coustom/useOnClickOutSide";
 import "./style.scss";
 
 const SocialInput = ({
@@ -13,8 +17,12 @@ const SocialInput = ({
 	svg,
 	inputID,
 }) => {
+	const { setInputState } = useContext(socialContext);
+	const ref = useRef();
+	useOnClickOutSide(ref, () => setInputState(false));
+
 	return (
-		<div className='position-relative'>
+		<div>
 			<div onClick={handleToggle} className='icon_wrapper'>
 				<i
 					className={`${iconClass} iconsStyle`}
@@ -35,14 +43,15 @@ const SocialInput = ({
 				<div
 					id={inputID}
 					className='position-absolute'
-					style={{ zIndex: "2", right: "-200%" }}
+					style={{ zIndex: "2", left: "0", width: "50%", marginTop: "0.5rem" }}
 				>
 					<input
+						ref={ref}
 						type='text'
 						placeholder={placeholder}
 						value={value}
 						onChange={onChange}
-						className='position-relative socialInput'
+						className='position-relative socialInput w-100'
 					/>
 					<button onClick={onSubmit} className='position-absolute submit_button'>
 						<i className='far fa-check'></i>

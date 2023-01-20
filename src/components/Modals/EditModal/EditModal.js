@@ -22,7 +22,7 @@ const EditModal = ({ userId, userData }) => {
 		imageAsBlob: "",
 	});
 
-	const [initialValues, setInitialValues] = useState({
+	const [initialValues] = useState({
 		phone: "",
 		email: "",
 		perisanFirstName: "",
@@ -43,59 +43,89 @@ const EditModal = ({ userId, userData }) => {
 		if (userData) {
 			console.log(userData);
 			formik.setValues({
-				phone: userData.profile.phone,
-				email: userData.profile.email,
-				perisanFirstName: userData.profile.first_name.fa,
-				persianLastName: userData.profile.last_name.fa,
-				englishFirstName: userData.profile.first_name.en,
-				englishLastName: userData.profile.last_name.en,
-				description_fa: userData.profile.description.fa,
-				description_en: userData.profile.description.en,
-				telegram: userData.profile.socials.find((item) => item.social === "telegram")
-					? userData.profile.socials.find((item) => item.social === "telegram").url
-					: " ",
-				instagram: userData.profile.socials.find((item) => item.social === "instagram")
-					? userData.profile.socials.find((item) => item.social === "instagram").url
-					: " ",
-				whatsapp: userData.profile.socials.find((item) => item.social === "whatsapp")
-					? userData.profile.socials.find((item) => item.social === "whatsapp").url
-					: " ",
-				linkedin: userData.profile.socials.find((item) => item.social === "linkedin")
-					? userData.profile.socials.find((item) => item.social === "linkedin").url
-					: " ",
-				dribbble: userData.profile.socials.find((item) => item.social === "dribbble")
-					? userData.profile.socials.find((item) => item.social === "dribbble").url
-					: " ",
-				pinterest: userData.profile.socials.find((item) => item.social === "pinterest")
-					? userData.profile.socials.find((item) => item.social === "pinterest").url
-					: " ",
-				twitter: userData.profile.socials.find((item) => item.social === "twitter")
-					? userData.profile.socials.find((item) => item.social === "twitter").url
-					: " ",
-				youtube: userData.profile.socials.find((item) => item.social === "youtube")
-					? userData.profile.socials.find((item) => item.social === "youtube").url
-					: " ",
-				aparat: userData.profile.socials.find((item) => item.social === "aparat")
-					? userData.profile.socials.find((item) => item.social === "aparat").url
-					: " ",
-				tiktok: userData.profile.socials.find((item) => item.social === "tiktok")
-					? userData.profile.socials.find((item) => item.social === "tiktok").url
-					: " ",
-				spotify: userData.profile.socials.find((item) => item.social === "spotify")
-					? userData.profile.socials.find((item) => item.social === "spotify").url
-					: " ",
-				soundcloud: userData.profile.socials.find((item) => item.social === "soundcloud")
-					? userData.profile.socials.find((item) => item.social === "soundcloud").url
-					: " ",
-				twitch: userData.profile.socials.find((item) => item.social === "twitch")
-					? userData.profile.socials.find((item) => item.social === "twitch").url
-					: " ",
-				github: userData.profile.socials.find((item) => item.social === "github")
-					? userData.profile.socials.find((item) => item.social === "github").url
-					: " ",
-				website: userData.profile.socials.find((item) => item.social === "website")
-					? userData.profile.socials.find((item) => item.social === "website").url
-					: " ",
+				phone: userData.profile.phone ? userData.profile.phone : "",
+				email: userData.profile.email ? userData.profile.email : "",
+				perisanFirstName: userData.profile.first_name ? userData.profile.first_name.fa : "",
+				persianLastName: userData.profile.last_name ? userData.profile.last_name.fa : "",
+				englishFirstName: userData.profile.first_name ? userData.profile.first_name.en : "",
+				englishLastName: userData.profile.last_name ? userData.profile.last_name.en : "",
+				description_fa: userData.profile.description ? userData.profile.description.fa : "",
+				description_en: userData.profile.description ? userData.profile.description.en : "",
+				telegram:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "telegram")
+						? userData.profile.socials.find((item) => item.social === "telegram").url
+						: "",
+				instagram:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "instagram")
+						? userData.profile.socials.find((item) => item.social === "instagram").url
+						: "",
+				whatsapp:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "whatsapp")
+						? userData.profile.socials.find((item) => item.social === "whatsapp").url
+						: "",
+				linkedin:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "linkedin")
+						? userData.profile.socials.find((item) => item.social === "linkedin").url
+						: "",
+				dribbble:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "dribbble")
+						? userData.profile.socials.find((item) => item.social === "dribbble").url
+						: "",
+				pinterest:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "pinterest")
+						? userData.profile.socials.find((item) => item.social === "pinterest").url
+						: "",
+				twitter:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "twitter")
+						? userData.profile.socials.find((item) => item.social === "twitter").url
+						: "",
+				youtube:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "youtube")
+						? userData.profile.socials.find((item) => item.social === "youtube").url
+						: "",
+				aparat:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "aparat")
+						? userData.profile.socials.find((item) => item.social === "aparat").url
+						: "",
+				tiktok:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "tiktok")
+						? userData.profile.socials.find((item) => item.social === "tiktok").url
+						: "",
+				spotify:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "spotify")
+						? userData.profile.socials.find((item) => item.social === "spotify").url
+						: "",
+				soundcloud:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "soundcloud")
+						? userData.profile.socials.find((item) => item.social === "soundcloud").url
+						: "",
+				twitch:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "twitch")
+						? userData.profile.socials.find((item) => item.social === "twitch").url
+						: "",
+				github:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "github")
+						? userData.profile.socials.find((item) => item.social === "github").url
+						: "",
+				website:
+					userData.profile.socials &&
+					userData.profile.socials.find((item) => item.social === "website")
+						? userData.profile.socials.find((item) => item.social === "website").url
+						: "",
 			});
 		}
 	}, [userData]);
@@ -317,23 +347,29 @@ const EditModal = ({ userId, userData }) => {
 
 	const handleSubmit = (values) => {
 		let socialMediaList = [];
-		if (values.telegram) socialMediaList.push({ social: "telegram", url: values.telegram });
-		if (values.instagram) socialMediaList.push({ social: "instagram", url: values.instagram });
-		if (values.whatsapp) socialMediaList.push({ social: "whatsapp", url: values.whatsapp });
-		if (values.linkedin) socialMediaList.push({ social: "linkedin", url: values.linkedin });
-		if (values.dribbble) socialMediaList.push({ social: "dribbble", url: values.dribbble });
-		if (values.pinterest) socialMediaList.push({ social: "pinterest", url: values.pinterest });
-		if (values.twitter) socialMediaList.push({ social: "twitter", url: values.twitter });
-		if (values.youtube) socialMediaList.push({ social: "youtube", url: values.youtube });
-		if (values.aparat) socialMediaList.push({ social: "aparat", url: values.aparat });
-		if (values.tiktok) socialMediaList.push({ social: "tiktok", url: values.tiktok });
-		if (values.spotify) socialMediaList.push({ social: "spotify", url: values.spotify });
-		if (values.soundcloud)
+		console.log(values);
+		if (values.telegram.length)
+			socialMediaList.push({ social: "telegram", url: values.telegram });
+		if (values.instagram.length)
+			socialMediaList.push({ social: "instagram", url: values.instagram });
+		if (values.whatsapp.length)
+			socialMediaList.push({ social: "whatsapp", url: values.whatsapp });
+		if (values.linkedin.length)
+			socialMediaList.push({ social: "linkedin", url: values.linkedin });
+		if (values.dribbble.length)
+			socialMediaList.push({ social: "dribbble", url: values.dribbble });
+		if (values.pinterest.length)
+			socialMediaList.push({ social: "pinterest", url: values.pinterest });
+		if (values.twitter.length) socialMediaList.push({ social: "twitter", url: values.twitter });
+		if (values.youtube.length) socialMediaList.push({ social: "youtube", url: values.youtube });
+		if (values.aparat.length) socialMediaList.push({ social: "aparat", url: values.aparat });
+		if (values.tiktok.length) socialMediaList.push({ social: "tiktok", url: values.tiktok });
+		if (values.spotify.length) socialMediaList.push({ social: "spotify", url: values.spotify });
+		if (values.soundcloud.length)
 			socialMediaList.push({ social: "soundcloud", url: values.soundcloud });
-		if (values.twitch) socialMediaList.push({ social: "twitch", url: values.twitch });
-		if (values.github)
-			socialMediaList.push({ social: "github", url: `https://github.com/${values.github}` });
-		if (values.website) socialMediaList.push({ social: "website", url: values.website });
+		if (values.twitch.length) socialMediaList.push({ social: "twitch", url: values.twitch });
+		if (values.github.length) socialMediaList.push({ social: "github", url: values.github });
+		if (values.website.length) socialMediaList.push({ social: "website", url: values.website });
 
 		const formdata = {
 			phone: formik.values.phone,
@@ -409,44 +445,43 @@ const EditModal = ({ userId, userData }) => {
 	return (
 		<ModalCore open={modalState.edit} onDismiss={handleDismiss}>
 			{userData ? (
-				<div className='Step d-flex flex-column'>
+				<div className='Step d-flex flex-column item'>
 					<div className='Form_wrapper  user-select-none '>
 						<form action='submit' className='Form' onSubmit={formik.handleSubmit}>
-							<div className='input_wrapper  position-relative'>
-								{/* ---------------- image input -------------------------*/}
-								<div className='avatarInput'>
-									<input
-										type='file'
-										accept='image/*'
-										id={userId}
-										className='imageInput'
-										onChange={(e) => handleImage(e)}
-									/>
-									<i className='fa fa-edit edit_icon'></i>
+							<div className='d-flex align-items-center flex-column'>
+								<div className='input_wrapper  position-relative'>
+									{/* ---------------- image input -------------------------*/}
+									<div className='avatarInput'>
+										<input
+											type='file'
+											accept='image/*'
+											id={userId}
+											className='imageInput'
+											onChange={(e) => handleImage(e)}
+										/>
+										<i className='fa fa-edit edit_icon'></i>
+									</div>
+									<div className='preview' id='preview'>
+										<img
+											src={
+												userData && userData.profile.resource
+													? userData.profile.resource.url
+													: image.imageAsBlob
+											}
+											alt='preview'
+										/>
+									</div>
 								</div>
-								<div className='preview' id='preview'>
-									<img
-										src={
-											userData && userData.profile.resource
-												? userData.profile.resource.url
-												: image.imageAsBlob
-										}
-										alt='preview'
-									/>
-								</div>
-							</div>
-							<label htmlFor={userId} className='mb-3'>
-								Choose your avatar from your file
-							</label>
-							{/* ---------------- image input -------------------------*/}
-							<div className='d-flex  flex-column w-75 '>
-								<span className='text-center mb-2'>
-									{" "}
-									User name : {userData.username}
-								</span>
 
+								{/* ---------------- image input -------------------------*/}
+
+								<span className='text-center mb-2 text-dark '>
+									{userData.username}
+								</span>
+							</div>
+							<div>
 								<div className='d-flex col-12 gap-3 justify-content-center align-items-center'>
-									<div className='d-flex flex-column w-100 position-relative'>
+									<div className='d-flex flex-column w-75 position-relative'>
 										{/* ---------------- phone input -------------------------*/}
 										<label htmlFor='phone'>Phone number</label>
 										<input
@@ -470,7 +505,7 @@ const EditModal = ({ userId, userData }) => {
 										)}
 										{/* ---------------- phone input -------------------------*/}
 									</div>
-									<div className='d-flex flex-column w-100 position-relative'>
+									<div className='d-flex flex-column w-75 position-relative'>
 										{/* ---------------- email input -------------------------*/}
 										<label htmlFor='email'>Email</label>
 										<input
@@ -495,8 +530,8 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- email input -------------------------*/}
 									</div>
 								</div>
-								<div className=' gap-3 justify-content-center align-items-center position-relative'>
-									<div className=''>
+								<div className=' d-flex col-12 gap-3 justify-content-center align-items-center'>
+									<div className='d-flex flex-column w-75 position-relative'>
 										{/* ---------------- persian name input -------------------------*/}
 										<label htmlFor='PersianName'>Persian first name</label>
 										<input
@@ -521,7 +556,10 @@ const EditModal = ({ userId, userData }) => {
 													{formik.errors.perisanFirstName}
 												</span>
 											)}
+
 										{/* ---------------- persian name input -------------------------*/}
+									</div>
+									<div className='d-flex flex-column w-75 position-relative'>
 										{/* ---------------- persian last input -------------------------*/}
 										<label htmlFor='PersianLastName'>Persian last name</label>
 										<input
@@ -549,8 +587,8 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- persian last input -------------------------*/}
 									</div>
 								</div>
-								<div className=' gap-3 justify-content-center align-items-center '>
-									<div className='position-relative'>
+								<div className=' d-flex col-12 gap-3 justify-content-center align-items-center '>
+									<div className='d-flex flex-column w-75 position-relative'>
 										{/* ---------------- english first name input -------------------------*/}
 										<label htmlFor='EnglishFirstName'>English first name</label>
 										<input
@@ -576,6 +614,8 @@ const EditModal = ({ userId, userData }) => {
 												</span>
 											)}
 										{/* ---------------- english first name input -------------------------*/}
+									</div>
+									<div className='d-flex flex-column w-75 position-relative'>
 										{/* ---------------- english last name input -------------------------*/}
 										<label htmlFor='EnglishLastName'>English last name</label>
 										<input
@@ -604,7 +644,7 @@ const EditModal = ({ userId, userData }) => {
 									</div>
 								</div>
 								<div className='d-flex col-12 gap-3 justify-content-center align-items-center '>
-									<div className='d-flex flex-column w-100 position-relative'>
+									<div className='d-flex flex-column w-75 position-relative'>
 										{/* ---------------- en description input -------------------------*/}
 										<label htmlFor='enDescription'>English description</label>
 										<textarea
@@ -631,7 +671,7 @@ const EditModal = ({ userId, userData }) => {
 											)}
 										{/* ---------------- en description input -------------------------*/}
 									</div>
-									<div className='d-flex flex-column w-100 position-relative'>
+									<div className='d-flex flex-column w-75 position-relative'>
 										{/* ---------------- fa description input -------------------------*/}
 										<label htmlFor='faDescription'>Persian description</label>
 										<textarea
@@ -659,7 +699,7 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- fa description input -------------------------*/}
 									</div>
 								</div>
-								<div className='d-flex flex-wrap w-100 justify-content-center align-items-center mb-4 mt-4 gap-1'>
+								<div className='d-flex flex-wrap w-100 justify-content-center align-items-center mb-4 mt-4 gap-1 position-relative'>
 									{socialMedias.map((social, index) => {
 										const nameOfSocial = social.name;
 										const socialItems = Object.entries(formik.values).find(
@@ -668,6 +708,7 @@ const EditModal = ({ userId, userData }) => {
 
 										return (
 											<SocialInput
+												placeholder='https://www. link . domain / ...'
 												value={socialItems ? socialItems[1] : ""}
 												inputID={index && inputIndex}
 												open={social.state}
@@ -678,7 +719,7 @@ const EditModal = ({ userId, userData }) => {
 												key={index}
 												iconClass={social.icon}
 												background={
-													social.state
+													socialItems && socialItems[1]
 														? social.background
 														: social.overlay
 												}
@@ -694,10 +735,12 @@ const EditModal = ({ userId, userData }) => {
 										);
 									})}
 								</div>
+								<div className='d-flex justify-content-end'>
+									<button type='submit' id='submitForm2'>
+										submit
+									</button>
+								</div>
 							</div>
-							<button type='submit' id='submitForm2'>
-								submit
-							</button>
 						</form>
 					</div>
 				</div>

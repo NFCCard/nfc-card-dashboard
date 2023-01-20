@@ -5,7 +5,6 @@ import Login from "../pages/Login";
 import { Route, Routes, Navigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import { useAuth } from "../hooks/auth/useAuth";
-// import Cookies from "js-cookie";
 
 function Navigation() {
 	const isAuthenticated = useAuth();

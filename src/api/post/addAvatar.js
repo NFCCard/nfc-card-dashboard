@@ -17,14 +17,14 @@ const addAvatar = async (userAvatar) => {
 		return response.data.data;
 	} catch (error) {
 		Object.entries(error.response.data.errors).map((messages) => {
-			messages[1].map((err) => {
-				errMsg.push(err);
+			return messages[1].map((err) => {
+				return errMsg.push(err);
 			});
 		});
 	}
 
 	errMsg.map((err) => {
-		Toastify({
+		return Toastify({
 			errorText: err,
 			type: "error",
 		});
