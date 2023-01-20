@@ -14,6 +14,14 @@ import { useEffect } from "react";
 const EditModal = ({ userId, userData }) => {
 	const { setUserData } = useContext(UserDataContext);
 	const { setModalState, modalState } = useContext(ModalContext);
+	const { inputState, setInputState } = useContext(socialContext);
+	const { mutate: createMutate } = useAddAvatar();
+	const { mutate: patchMutate, status } = useUpdateUser();
+	const [image, setImage] = useState({
+		imageAsFile: "",
+		imageAsBlob: "",
+	});
+
 	const [initialValues, setInitialValues] = useState({
 		phone: "",
 		email: "",
@@ -37,25 +45,60 @@ const EditModal = ({ userId, userData }) => {
 			formik.setValues({
 				phone: userData.profile.phone,
 				email: userData.profile.email,
-				perisanFirstName: userData.profile.perisanFirstName,
-				persianLastName: userData.profile.persianLastName,
-				englishFirstName: userData.profile.englishFirstName,
-				englishLastName: userData.profile.englishLastName,
+				perisanFirstName: userData.profile.first_name.fa,
+				persianLastName: userData.profile.last_name.fa,
+				englishFirstName: userData.profile.first_name.en,
+				englishLastName: userData.profile.last_name.en,
 				description_fa: userData.profile.description.fa,
 				description_en: userData.profile.description.en,
+				telegram: userData.profile.socials.find((item) => item.social === "telegram")
+					? userData.profile.socials.find((item) => item.social === "telegram").url
+					: " ",
+				instagram: userData.profile.socials.find((item) => item.social === "instagram")
+					? userData.profile.socials.find((item) => item.social === "instagram").url
+					: " ",
+				whatsapp: userData.profile.socials.find((item) => item.social === "whatsapp")
+					? userData.profile.socials.find((item) => item.social === "whatsapp").url
+					: " ",
+				linkedin: userData.profile.socials.find((item) => item.social === "linkedin")
+					? userData.profile.socials.find((item) => item.social === "linkedin").url
+					: " ",
+				dribbble: userData.profile.socials.find((item) => item.social === "dribbble")
+					? userData.profile.socials.find((item) => item.social === "dribbble").url
+					: " ",
+				pinterest: userData.profile.socials.find((item) => item.social === "pinterest")
+					? userData.profile.socials.find((item) => item.social === "pinterest").url
+					: " ",
+				twitter: userData.profile.socials.find((item) => item.social === "twitter")
+					? userData.profile.socials.find((item) => item.social === "twitter").url
+					: " ",
+				youtube: userData.profile.socials.find((item) => item.social === "youtube")
+					? userData.profile.socials.find((item) => item.social === "youtube").url
+					: " ",
+				aparat: userData.profile.socials.find((item) => item.social === "aparat")
+					? userData.profile.socials.find((item) => item.social === "aparat").url
+					: " ",
+				tiktok: userData.profile.socials.find((item) => item.social === "tiktok")
+					? userData.profile.socials.find((item) => item.social === "tiktok").url
+					: " ",
+				spotify: userData.profile.socials.find((item) => item.social === "spotify")
+					? userData.profile.socials.find((item) => item.social === "spotify").url
+					: " ",
+				soundcloud: userData.profile.socials.find((item) => item.social === "soundcloud")
+					? userData.profile.socials.find((item) => item.social === "soundcloud").url
+					: " ",
+				twitch: userData.profile.socials.find((item) => item.social === "twitch")
+					? userData.profile.socials.find((item) => item.social === "twitch").url
+					: " ",
+				github: userData.profile.socials.find((item) => item.social === "github")
+					? userData.profile.socials.find((item) => item.social === "github").url
+					: " ",
+				website: userData.profile.socials.find((item) => item.social === "website")
+					? userData.profile.socials.find((item) => item.social === "website").url
+					: " ",
 			});
 		}
-
-		console.log(formik.values);
 	}, [userData]);
-
-	const { inputState, setInputState } = useContext(socialContext);
-	const { mutate: createMutate } = useAddAvatar();
-	const { mutate: patchMutate, status } = useUpdateUser();
-	const [image, setImage] = useState({
-		imageAsFile: "",
-		imageAsBlob: "",
-	});
 
 	const socialMedias = [
 		{
@@ -274,68 +317,20 @@ const EditModal = ({ userId, userData }) => {
 
 	const handleSubmit = (values) => {
 		let socialMediaList = [];
-		if (values.telegram)
-			socialMediaList.push({
-				social: "telegram",
-				url: `https://t.me/joinchat/${values.telegram}`,
-			});
-		if (values.instagram)
-			socialMediaList.push({
-				social: "instagram",
-				url: `https://www.instagram.com/${values.instagram}`,
-			});
-		if (values.whatsapp)
-			socialMediaList.push({ social: "whatsapp", url: `https://wa.me/${values.whatsapp}` });
-		if (values.linkedin)
-			socialMediaList.push({
-				social: "linkedin",
-				url: `https://www.linkedin.com/${values.linkedin}`,
-			});
-		if (values.dribbble)
-			socialMediaList.push({
-				social: "dribbble",
-				url: `https://www.dribbble.com/${values.dribbble}`,
-			});
-		if (values.pinterest)
-			socialMediaList.push({
-				social: "pinterest",
-				url: `https://www.pinterest.com/${values.pinterest}`,
-			});
-		if (values.twitter)
-			socialMediaList.push({
-				social: "twitter",
-				url: `https://www.twitter.com/${values.twitter}`,
-			});
-		if (values.youtube)
-			socialMediaList.push({
-				social: "youtube",
-				url: `https://www.youtube.com/channel/${values.youtube}`,
-			});
-		if (values.aparat)
-			socialMediaList.push({
-				social: "aparat",
-				url: `https://www.aparat.com/${values.aparat}`,
-			});
-		if (values.tiktok)
-			socialMediaList.push({
-				social: "tiktok",
-				url: `https://www.tiktok.com/${values.tiktok}`,
-			});
-		if (values.spotify)
-			socialMediaList.push({
-				social: "spotify",
-				url: `https://www.spotify.com/${values.spotify}`,
-			});
+		if (values.telegram) socialMediaList.push({ social: "telegram", url: values.telegram });
+		if (values.instagram) socialMediaList.push({ social: "instagram", url: values.instagram });
+		if (values.whatsapp) socialMediaList.push({ social: "whatsapp", url: values.whatsapp });
+		if (values.linkedin) socialMediaList.push({ social: "linkedin", url: values.linkedin });
+		if (values.dribbble) socialMediaList.push({ social: "dribbble", url: values.dribbble });
+		if (values.pinterest) socialMediaList.push({ social: "pinterest", url: values.pinterest });
+		if (values.twitter) socialMediaList.push({ social: "twitter", url: values.twitter });
+		if (values.youtube) socialMediaList.push({ social: "youtube", url: values.youtube });
+		if (values.aparat) socialMediaList.push({ social: "aparat", url: values.aparat });
+		if (values.tiktok) socialMediaList.push({ social: "tiktok", url: values.tiktok });
+		if (values.spotify) socialMediaList.push({ social: "spotify", url: values.spotify });
 		if (values.soundcloud)
-			socialMediaList.push({
-				social: "soundcloud",
-				url: `https://www.soundcloud.com/${values.soundcloud}`,
-			});
-		if (values.twitch)
-			socialMediaList.push({
-				social: "twitch",
-				url: `https://www.twitch.com/${values.twitch}`,
-			});
+			socialMediaList.push({ social: "soundcloud", url: values.soundcloud });
+		if (values.twitch) socialMediaList.push({ social: "twitch", url: values.twitch });
 		if (values.github)
 			socialMediaList.push({ social: "github", url: `https://github.com/${values.github}` });
 		if (values.website) socialMediaList.push({ social: "website", url: values.website });
@@ -415,7 +410,6 @@ const EditModal = ({ userId, userData }) => {
 		<ModalCore open={modalState.edit} onDismiss={handleDismiss}>
 			{userData ? (
 				<div className='Step d-flex flex-column'>
-					<span className='text-center mb-2'> User name : {userData.username}</span>
 					<div className='Form_wrapper  user-select-none '>
 						<form action='submit' className='Form' onSubmit={formik.handleSubmit}>
 							<div className='input_wrapper  position-relative'>
@@ -446,6 +440,11 @@ const EditModal = ({ userId, userData }) => {
 							</label>
 							{/* ---------------- image input -------------------------*/}
 							<div className='d-flex  flex-column w-75 '>
+								<span className='text-center mb-2'>
+									{" "}
+									User name : {userData.username}
+								</span>
+
 								<div className='d-flex col-12 gap-3 justify-content-center align-items-center'>
 									<div className='d-flex flex-column w-100 position-relative'>
 										{/* ---------------- phone input -------------------------*/}
@@ -662,8 +661,14 @@ const EditModal = ({ userId, userData }) => {
 								</div>
 								<div className='d-flex flex-wrap w-100 justify-content-center align-items-center mb-4 mt-4 gap-1'>
 									{socialMedias.map((social, index) => {
+										const nameOfSocial = social.name;
+										const socialItems = Object.entries(formik.values).find(
+											(item) => item[0] === nameOfSocial
+										);
+
 										return (
 											<SocialInput
+												value={socialItems ? socialItems[1] : ""}
 												inputID={index && inputIndex}
 												open={social.state}
 												handleToggle={() =>
@@ -680,7 +685,6 @@ const EditModal = ({ userId, userData }) => {
 												svg={social.state ? social.svg : social.svgOverlay}
 												onSubmit={() => dissmis(social.name, index)}
 												onChange={(e) => {
-													const nameOfSocial = social.name;
 													formik.setValues({
 														...formik.values,
 														[nameOfSocial]: e.target.value,

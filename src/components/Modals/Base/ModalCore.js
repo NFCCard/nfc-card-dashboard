@@ -15,7 +15,7 @@ const ModalCore = ({ children, modalId, open, onDismiss }) => {
 					ariaHideApp={false}
 					onRequestClose={onDismiss}
 				>
-					<header className='d-flex justify-content-end mb-3'>
+					<header className='d-flex justify-content-end mb-3 modalHeader'>
 						<button onClick={onDismiss} className='tableButton '>
 							<FontAwesomeIcon icon={solid("close")} color='#fff' />
 						</button>

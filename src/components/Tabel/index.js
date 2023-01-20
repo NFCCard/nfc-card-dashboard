@@ -102,7 +102,7 @@ const Table = ({ content, isLoading }) => {
 													>
 														<FontAwesomeIcon
 															icon={solid("edit")}
-															color='#000'
+															color='#fff'
 														/>
 													</button>
 													<button
@@ -111,7 +111,7 @@ const Table = ({ content, isLoading }) => {
 													>
 														<FontAwesomeIcon
 															icon={solid("trash")}
-															color='#000'
+															color='#fff'
 														/>
 													</button>
 												</div>
