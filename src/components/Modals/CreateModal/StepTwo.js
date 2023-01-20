@@ -25,8 +25,10 @@ const StepTwo = () => {
 	const initialValues = {
 		phone: "",
 		email: "",
-		perisanName: "",
-		englishName: "",
+		perisanFirstName: "",
+		perisanLastName: "",
+		englishFirstName: "",
+		englishLastName: "",
 		description_fa: "",
 		description_en: "",
 	};
@@ -248,71 +250,29 @@ const StepTwo = () => {
 
 	const handleSubmit = (values) => {
 		let socialMediaList = [];
-		if (values.telegram)
-			socialMediaList.push({
-				social: "telegram",
-				url: `https://t.me/joinchat/${values.telegram}`,
-			});
-		if (values.instagram)
-			socialMediaList.push({
-				social: "instagram",
-				url: `https://www.instagram.com/${values.instagram}`,
-			});
-		if (values.whatsapp)
-			socialMediaList.push({ social: "whatsapp", url: `https://wa.me/${values.whatsapp}` });
-		if (values.linkedin)
-			socialMediaList.push({
-				social: "linkedin",
-				url: `https://www.linkedin.com/${values.linkedin}`,
-			});
-		if (values.dribbble)
-			socialMediaList.push({
-				social: "dribbble",
-				url: `https://www.dribbble.com/${values.dribbble}`,
-			});
-		if (values.pinterest)
-			socialMediaList.push({
-				social: "pinterest",
-				url: `https://www.pinterest.com/${values.pinterest}`,
-			});
-		if (values.twitter)
-			socialMediaList.push({
-				social: "twitter",
-				url: `https://www.twitter.com/${values.twitter}`,
-			});
-		if (values.youtube)
-			socialMediaList.push({
-				social: "youtube",
-				url: `https://www.youtube.com/channel/${values.youtube}`,
-			});
-		if (values.aparat)
-			socialMediaList.push({
-				social: "aparat",
-				url: `https://www.aparat.com/${values.aparat}`,
-			});
-		if (values.tiktok)
-			socialMediaList.push({
-				social: "tiktok",
-				url: `https://www.tiktok.com/${values.tiktok}`,
-			});
-		if (values.spotify)
-			socialMediaList.push({
-				social: "spotify",
-				url: `https://www.spotify.com/${values.spotify}`,
-			});
-		if (values.soundcloud)
-			socialMediaList.push({
-				social: "soundcloud",
-				url: `https://www.soundcloud.com/${values.soundcloud}`,
-			});
-		if (values.twitch)
-			socialMediaList.push({
-				social: "twitch",
-				url: `https://www.twitch.com/${values.twitch}`,
-			});
-		if (values.github)
-			socialMediaList.push({ social: "github", url: `https://github.com/${values.github}` });
-		if (values.website) socialMediaList.push({ social: "website", url: values.website });
+		console.log(values);
+		if (values.telegram.length)
+			socialMediaList.push({ social: "telegram", url: values.telegram });
+		if (values.instagram.length)
+			socialMediaList.push({ social: "instagram", url: values.instagram });
+		if (values.whatsapp.length)
+			socialMediaList.push({ social: "whatsapp", url: values.whatsapp });
+		if (values.linkedin.length)
+			socialMediaList.push({ social: "linkedin", url: values.linkedin });
+		if (values.dribbble.length)
+			socialMediaList.push({ social: "dribbble", url: values.dribbble });
+		if (values.pinterest.length)
+			socialMediaList.push({ social: "pinterest", url: values.pinterest });
+		if (values.twitter.length) socialMediaList.push({ social: "twitter", url: values.twitter });
+		if (values.youtube.length) socialMediaList.push({ social: "youtube", url: values.youtube });
+		if (values.aparat.length) socialMediaList.push({ social: "aparat", url: values.aparat });
+		if (values.tiktok.length) socialMediaList.push({ social: "tiktok", url: values.tiktok });
+		if (values.spotify.length) socialMediaList.push({ social: "spotify", url: values.spotify });
+		if (values.soundcloud.length)
+			socialMediaList.push({ social: "soundcloud", url: values.soundcloud });
+		if (values.twitch.length) socialMediaList.push({ social: "twitch", url: values.twitch });
+		if (values.github.length) socialMediaList.push({ social: "github", url: values.github });
+		if (values.website.length) socialMediaList.push({ social: "website", url: values.website });
 
 		const formdata = {
 			phone: values.phone,
@@ -383,33 +343,34 @@ const StepTwo = () => {
 	};
 
 	return (
-		<div className='Step '>
+		<div className='Step d-flex flex-column item'>
 			<div className='Form_wrapper  user-select-none '>
 				<form action='submit' className='Form' onSubmit={formik.handleSubmit}>
-					<div className='input_wrapper  position-relative'>
-						{/* ---------------- image input -------------------------*/}
-						<input
-							type='file'
-							accept='image/*'
-							id={usersImageId}
-							className='imageInput'
-							onChange={(e) => handleImage(e)}
-						/>
-						<div
-							className='preview'
-							id='preview'
-							style={image.imageAsBlob ? { display: "unset" } : { display: "none" }}
-						>
-							<img src={image.imageAsBlob} alt='preview' />
+					<div className='d-flex align-items-center flex-column'>
+						<div className='input_wrapper  position-relative'>
+							{/* ---------------- image input -------------------------*/}
+							<input
+								type='file'
+								accept='image/*'
+								id={usersImageId}
+								className='imageInput'
+								onChange={(e) => handleImage(e)}
+							/>
+							<div
+								className='preview'
+								id='preview'
+								style={
+									image.imageAsBlob ? { display: "unset" } : { display: "none" }
+								}
+							>
+								<img src={image.imageAsBlob} alt='preview' />
+							</div>
 						</div>
+						<label htmlFor={usersImageId} className='mb-3'>
+							Choose an avatar
+						</label>
 					</div>
-					<label htmlFor={usersImageId} className='mb-3'>
-						{!image
-							? "Choose your avatar from your file"
-							: "Your avatar append to your profile"}
-					</label>
-					{/* ---------------- image input -------------------------*/}
-					<div className='d-flex  flex-column w-75 '>
+					<div>
 						<div className='d-flex col-12 gap-3 justify-content-center align-items-center'>
 							<div className='d-flex flex-column w-100'>
 								{/* ---------------- phone input -------------------------*/}
@@ -454,58 +415,109 @@ const StepTwo = () => {
 								{/* ---------------- email input -------------------------*/}
 							</div>
 						</div>
-						<div className=' gap-3 justify-content-center align-items-center'>
-							<div className=''>
-								{/* ---------------- persian name input -------------------------*/}
-								<label htmlFor='PersianName'>Persian name</label>
+						<div className=' d-flex col-12 gap-3 justify-content-center align-items-center'>
+							<div className='d-flex flex-column w-75 position-relative'>
+								{/* ---------------- persian first name input -------------------------*/}
+
+								<label htmlFor='PersianFirstName'>Persian first name</label>
 								<input
 									type='text'
-									id='PersianName'
+									id='PersianFirstName'
 									className='textInput'
 									autoComplete='off'
 									onChange={(e) => {
 										formik.setValues({
 											...formik.values,
-											perisanName: e.target.value,
+											perisanFirstName: e.target.value,
 										});
 									}}
-									onFocus={() => formik.setTouched({ perisanName: true })}
+									onFocus={() => formik.setTouched({ perisanFirstName: true })}
 								/>
-								{formik.errors.perisanName && formik.touched.perisanName && (
-									<span className='usernameError'>
-										{formik.errors.perisanName}
-									</span>
-								)}
-								{/* ---------------- persian name input -------------------------*/}
+								{formik.errors.perisanFirstName &&
+									formik.touched.perisanFirstName && (
+										<span className='usernameError'>
+											{formik.errors.perisanFirstName}
+										</span>
+									)}
+								{/* ----------------  persian first name input -------------------------*/}
+							</div>
+							<div className='d-flex flex-column w-75 position-relative'>
+								{/* ---------------- persian last name input -------------------------*/}
+								<label htmlFor='PersianLastName'>Persian last name</label>
+								<input
+									type='text'
+									id='PersianLastName'
+									className='textInput'
+									autoComplete='off'
+									onChange={(e) => {
+										formik.setValues({
+											...formik.values,
+											perisanLastName: e.target.value,
+										});
+									}}
+									onFocus={() => formik.setTouched({ perisanLastName: true })}
+								/>
+								{formik.errors.perisanLastName &&
+									formik.touched.perisanLastName && (
+										<span className='usernameError'>
+											{formik.errors.perisanLastName}
+										</span>
+									)}
+								{/* ----------------  persian first name input -------------------------*/}
 							</div>
 						</div>
-						<div className=' gap-3 justify-content-center align-items-center'>
-							<div className=''>
-								{/* ---------------- english name input -------------------------*/}
-								<label htmlFor='EnglishName'>English name</label>
+						<div className=' d-flex col-12 gap-3 justify-content-center align-items-center'>
+							<div className='d-flex flex-column w-75 position-relative'>
+								{/* ---------------- english first name input -------------------------*/}
+								<label htmlFor='EnglishFirstName'>English first name</label>
 								<input
 									type='text'
-									id='EnglishName'
+									id='EnglishFirstName'
 									className='textInput'
 									autoComplete='off'
 									onChange={(e) => {
 										formik.setValues({
 											...formik.values,
-											englishName: e.target.value,
+											englishFirstName: e.target.value,
 										});
 									}}
-									onFocus={() => formik.setTouched({ englishName: true })}
+									onFocus={() => formik.setTouched({ englishFirstName: true })}
 								/>
-								{formik.errors.englishName && formik.touched.englishName && (
-									<span className='usernameError'>
-										{formik.errors.englishName}
-									</span>
-								)}
-								{/* ---------------- english name input -------------------------*/}
+								{formik.errors.englishFirstName &&
+									formik.touched.englishFirstName && (
+										<span className='usernameError'>
+											{formik.errors.englishFirstName}
+										</span>
+									)}
+								{/* ---------------- english first name input -------------------------*/}
+							</div>
+							<div className='d-flex flex-column w-75 position-relative'>
+								{/* ---------------- english last name input -------------------------*/}
+								<label htmlFor='EnglishLastName'>English last name</label>
+								<input
+									type='text'
+									id='EnglishLastName'
+									className='textInput'
+									autoComplete='off'
+									onChange={(e) => {
+										formik.setValues({
+											...formik.values,
+											englishLastName: e.target.value,
+										});
+									}}
+									onFocus={() => formik.setTouched({ englishLastName: true })}
+								/>
+								{formik.errors.englishLastName &&
+									formik.touched.englishLastName && (
+										<span className='usernameError'>
+											{formik.errors.englishLastName}
+										</span>
+									)}
+								{/* ---------------- english last name input -------------------------*/}
 							</div>
 						</div>
 						<div className='d-flex col-12 gap-3 justify-content-center align-items-center'>
-							<div className='d-flex flex-column w-100'>
+							<div className='d-flex flex-column w-75'>
 								{/* ---------------- en description input -------------------------*/}
 								<label htmlFor='enDescription'>English description</label>
 								<textarea
@@ -528,7 +540,7 @@ const StepTwo = () => {
 								)}
 								{/* ---------------- en description input -------------------------*/}
 							</div>
-							<div className='d-flex flex-column w-100'>
+							<div className='d-flex flex-column w-75'>
 								{/* ---------------- fa description input -------------------------*/}
 								<label htmlFor='faDescription'>Persian description</label>
 								<textarea
@@ -552,10 +564,19 @@ const StepTwo = () => {
 								{/* ---------------- fa description input -------------------------*/}
 							</div>
 						</div>
-						<div className='d-flex flex-wrap w-100 justify-content-center align-items-center mb-4 mt-4 gap-1'>
+						<div className='d-flex flex-wrap w-100 justify-content-center align-items-center mb-4 mt-4 gap-1 position-relative'>
 							{socialMedias.map((social, index) => {
+								const nameOfSocial = social.name;
+								const socialItems = Object.entries(formik.values).find(
+									(item) => item[0] === nameOfSocial
+								);
+
+								console.log(socialItems && socialItems[1]);
+
 								return (
 									<SocialInput
+										value={socialItems ? socialItems[1] : ""}
+										placeholder='https://www. link . domain / ...'
 										inputID={index && inputIndex}
 										open={social.state}
 										handleToggle={() => handleToggle(social.name, index)}
@@ -563,12 +584,17 @@ const StepTwo = () => {
 										key={index}
 										iconClass={social.icon}
 										background={
-											social.state ? social.background : social.overlay
+											socialItems && socialItems[1]
+												? social.background
+												: social.overlay
 										}
-										svg={social.state ? social.svg : social.svgOverlay}
+										svg={
+											socialItems && socialItems[1]
+												? social.svg
+												: social.svgOverlay
+										}
 										onSubmit={() => dissmis(social.name, index)}
 										onChange={(e) => {
-											const nameOfSocial = social.name;
 											formik.setValues({
 												...formik.values,
 												[nameOfSocial]: e.target.value,
@@ -578,10 +604,12 @@ const StepTwo = () => {
 								);
 							})}
 						</div>
+						<div className='d-flex justify-content-end'>
+							<button type='submit' id='submitForm2'>
+								submit
+							</button>
+						</div>
 					</div>
-					<button type='submit' id='submitForm2'>
-						submit
-					</button>
 				</form>
 			</div>
 		</div>

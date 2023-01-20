@@ -472,9 +472,6 @@ const EditModal = ({ userId, userData }) => {
 										/>
 									</div>
 								</div>
-
-								{/* ---------------- image input -------------------------*/}
-
 								<span className='text-center mb-2 text-dark '>
 									{userData.username}
 								</span>
@@ -723,7 +720,11 @@ const EditModal = ({ userId, userData }) => {
 														? social.background
 														: social.overlay
 												}
-												svg={social.state ? social.svg : social.svgOverlay}
+												svg={
+													socialItems && socialItems[1]
+														? social.svg
+														: social.svgOverlay
+												}
 												onSubmit={() => dissmis(social.name, index)}
 												onChange={(e) => {
 													formik.setValues({

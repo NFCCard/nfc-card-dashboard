@@ -7,9 +7,11 @@ export const createFormStepTwoValidaition = yup.object({
 		.email("writing email correctly")
 		.required("*email required"),
 
-	perisanName: yup.string().required("*Persian name required"),
+	perisanFirstName: yup.string("number is worng").required("*Persian first name required"),
+	persianLastName: yup.string("number	is worng").required("*Persian last name required"),
 
-	englishName: yup.string().required("*English name required"),
+	englishFirstName: yup.string("number is worng").required("*English first name required"),
+	englishLastName: yup.string("number is worng").required("*English last name required"),
 
 	description_fa: yup.string().required("*Persian description required"),
 	description_en: yup.string().required("*English description required"),
