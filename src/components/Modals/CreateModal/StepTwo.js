@@ -1,6 +1,5 @@
+import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
-import React, { useState } from "react";
-import { useContext } from "react";
 import { ModalContext } from "../../../context/ModalContextProvider";
 import { socialContext } from "../../../context/SocialInputContextProvider";
 import useAddAvatar from "../../../hooks/core/useAddAvatar";
@@ -12,17 +11,17 @@ import { UserDataContext } from "../../../context/UserDataContextProvider";
 
 const StepTwo = () => {
 	const { inputState, setInputState } = useContext(socialContext);
-	const { userData } = useContext(UserDataContext);
+	const { userData, setUserData } = useContext(UserDataContext);
 	const { setModalState } = useContext(ModalContext);
 	const { mutate: createMutate } = useAddAvatar();
-	const { mutate: patchMutate, status } = useUpdateUser();
+	const { mutate: userMutate, status } = useUpdateUser();
 	const usersImageId = userData.userProfileId;
 	const [image, setImage] = useState({
 		imageAsFile: "",
 		imageAsBlob: "",
 	});
 
-	const initialValues = {
+	const [initialValues] = useState({
 		phone: "",
 		email: "",
 		perisanFirstName: "",
@@ -31,7 +30,7 @@ const StepTwo = () => {
 		englishLastName: "",
 		description_fa: "",
 		description_en: "",
-	};
+	});
 
 	const socialMedias = [
 		{
@@ -251,47 +250,41 @@ const StepTwo = () => {
 	const handleSubmit = (values) => {
 		let socialMediaList = [];
 		console.log(values);
-		if (values.telegram.length)
-			socialMediaList.push({ social: "telegram", url: values.telegram });
-		if (values.instagram.length)
-			socialMediaList.push({ social: "instagram", url: values.instagram });
-		if (values.whatsapp.length)
-			socialMediaList.push({ social: "whatsapp", url: values.whatsapp });
-		if (values.linkedin.length)
-			socialMediaList.push({ social: "linkedin", url: values.linkedin });
-		if (values.dribbble.length)
-			socialMediaList.push({ social: "dribbble", url: values.dribbble });
-		if (values.pinterest.length)
-			socialMediaList.push({ social: "pinterest", url: values.pinterest });
-		if (values.twitter.length) socialMediaList.push({ social: "twitter", url: values.twitter });
-		if (values.youtube.length) socialMediaList.push({ social: "youtube", url: values.youtube });
-		if (values.aparat.length) socialMediaList.push({ social: "aparat", url: values.aparat });
-		if (values.tiktok.length) socialMediaList.push({ social: "tiktok", url: values.tiktok });
-		if (values.spotify.length) socialMediaList.push({ social: "spotify", url: values.spotify });
-		if (values.soundcloud.length)
+		if (values.telegram) socialMediaList.push({ social: "telegram", url: values.telegram });
+		if (values.instagram) socialMediaList.push({ social: "instagram", url: values.instagram });
+		if (values.whatsapp) socialMediaList.push({ social: "whatsapp", url: values.whatsapp });
+		if (values.linkedin) socialMediaList.push({ social: "linkedin", url: values.linkedin });
+		if (values.dribbble) socialMediaList.push({ social: "dribbble", url: values.dribbble });
+		if (values.pinterest) socialMediaList.push({ social: "pinterest", url: values.pinterest });
+		if (values.twitter) socialMediaList.push({ social: "twitter", url: values.twitter });
+		if (values.youtube) socialMediaList.push({ social: "youtube", url: values.youtube });
+		if (values.aparat) socialMediaList.push({ social: "aparat", url: values.aparat });
+		if (values.tiktok) socialMediaList.push({ social: "tiktok", url: values.tiktok });
+		if (values.spotify) socialMediaList.push({ social: "spotify", url: values.spotify });
+		if (values.soundcloud)
 			socialMediaList.push({ social: "soundcloud", url: values.soundcloud });
-		if (values.twitch.length) socialMediaList.push({ social: "twitch", url: values.twitch });
-		if (values.github.length) socialMediaList.push({ social: "github", url: values.github });
-		if (values.website.length) socialMediaList.push({ social: "website", url: values.website });
+		if (values.twitch) socialMediaList.push({ social: "twitch", url: values.twitch });
+		if (values.github) socialMediaList.push({ social: "github", url: values.github });
+		if (values.website) socialMediaList.push({ social: "website", url: values.website });
 
 		const formdata = {
 			phone: values.phone,
 			email: values.email,
 			socials: socialMediaList,
 			first_name: {
-				en: "alireza",
-				fa: "علیرضا",
+				en: values.englishFirstName,
+				fa: values.perisanFirstName,
 			},
 			last_name: {
-				en: "alinezhad",
-				fa: "علینژاد",
+				en: values.englishLastName,
+				fa: values.englishLastName,
 			},
 			description: {
 				en: values.description_en,
 				fa: values.description_fa,
 			},
 		};
-		patchMutate({ values: formdata, userId: usersImageId });
+		userMutate({ values: formdata, userId: usersImageId });
 		if (status === "idle") {
 			setModalState((prev) => ({
 				...prev,
@@ -304,11 +297,15 @@ const StepTwo = () => {
 		initialValues: initialValues,
 		validationSchema: createFormStepTwoValidaition,
 		onSubmit: (values) => {
+			console.log(values);
 			handleSubmit(values);
 		},
 	});
 
 	const handleImage = (e) => {
+		setUserData({
+			userProfileId: usersImageId,
+		});
 		new Compressor(e.target.files[0], {
 			quality: 0.4,
 			convertTypes: ["image/jpg"],
@@ -349,21 +346,26 @@ const StepTwo = () => {
 					<div className='d-flex align-items-center flex-column'>
 						<div className='input_wrapper  position-relative'>
 							{/* ---------------- image input -------------------------*/}
-							<input
-								type='file'
-								accept='image/*'
-								id={usersImageId}
-								className='imageInput'
-								onChange={(e) => handleImage(e)}
-							/>
-							<div
-								className='preview'
-								id='preview'
-								style={
-									image.imageAsBlob ? { display: "unset" } : { display: "none" }
-								}
-							>
-								<img src={image.imageAsBlob} alt='preview' />
+							<div className='avatarInput'>
+								<input
+									type='file'
+									accept='image/*'
+									id={usersImageId}
+									className='imageInput'
+									onChange={(e) => handleImage(e)}
+								/>
+								<i className='fa fa-edit edit_icon'></i>
+								<div
+									className='preview'
+									id='preview'
+									style={
+										image.imageAsBlob
+											? { display: "unset" }
+											: { display: "none" }
+									}
+								>
+									<img src={image.imageAsBlob} alt='preview' />
+								</div>
 							</div>
 						</div>
 						<label htmlFor={usersImageId} className='mb-3'>
@@ -372,7 +374,7 @@ const StepTwo = () => {
 					</div>
 					<div>
 						<div className='d-flex col-12 gap-3 justify-content-center align-items-center'>
-							<div className='d-flex flex-column w-100'>
+							<div className='d-flex flex-column w-75 position-relative'>
 								{/* ---------------- phone input -------------------------*/}
 								<label htmlFor='phone'>Phone number</label>
 								<input
@@ -393,7 +395,7 @@ const StepTwo = () => {
 								)}
 								{/* ---------------- phone input -------------------------*/}
 							</div>
-							<div className='d-flex flex-column w-100'>
+							<div className='d-flex flex-column w-75 position-relative'>
 								{/* ---------------- email input -------------------------*/}
 								<label htmlFor='email'>Email</label>
 								<input
@@ -452,15 +454,15 @@ const StepTwo = () => {
 									onChange={(e) => {
 										formik.setValues({
 											...formik.values,
-											perisanLastName: e.target.value,
+											persianLastName: e.target.value,
 										});
 									}}
-									onFocus={() => formik.setTouched({ perisanLastName: true })}
+									onFocus={() => formik.setTouched({ persianLastName: true })}
 								/>
-								{formik.errors.perisanLastName &&
-									formik.touched.perisanLastName && (
+								{formik.errors.persianLastName &&
+									formik.touched.persianLastName && (
 										<span className='usernameError'>
-											{formik.errors.perisanLastName}
+											{formik.errors.persianLastName}
 										</span>
 									)}
 								{/* ----------------  persian first name input -------------------------*/}
@@ -570,9 +572,6 @@ const StepTwo = () => {
 								const socialItems = Object.entries(formik.values).find(
 									(item) => item[0] === nameOfSocial
 								);
-
-								console.log(socialItems && socialItems[1]);
-
 								return (
 									<SocialInput
 										value={socialItems ? socialItems[1] : ""}

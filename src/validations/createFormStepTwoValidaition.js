@@ -13,6 +13,6 @@ export const createFormStepTwoValidaition = yup.object({
 	englishFirstName: yup.string("number is worng").required("*English first name required"),
 	englishLastName: yup.string("number is worng").required("*English last name required"),
 
-	description_fa: yup.string().required("*Persian description required"),
-	description_en: yup.string().required("*English description required"),
+	description_fa: yup.string(),
+	description_en: yup.string(),
 });

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import ModalCore from "../Base/ModalCore";
 import { ModalContext } from "../../../context/ModalContextProvider";
 import { socialContext } from "../../../context/SocialInputContextProvider";
@@ -9,7 +9,6 @@ import { editValidations } from "../../../validations/editValidations";
 import Compressor from "compressorjs";
 import SocialInput from "../../SocialInput/SocialInput";
 import { UserDataContext } from "../../../context/UserDataContextProvider";
-import { useEffect } from "react";
 
 const EditModal = ({ userId, userData }) => {
 	const { setUserData } = useContext(UserDataContext);
@@ -41,7 +40,6 @@ const EditModal = ({ userId, userData }) => {
 
 	useEffect(() => {
 		if (userData) {
-			console.log(userData);
 			formik.setValues({
 				phone: userData.profile.phone ? userData.profile.phone : "",
 				email: userData.profile.email ? userData.profile.email : "",
@@ -482,7 +480,7 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- phone input -------------------------*/}
 										<label htmlFor='phone'>Phone number</label>
 										<input
-											value={formik.values.phone}
+											value={formik.values && formik.values.phone}
 											type='text'
 											id='phone'
 											className='textInput '
@@ -506,7 +504,7 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- email input -------------------------*/}
 										<label htmlFor='email'>Email</label>
 										<input
-											value={formik.values.email}
+											value={formik.values && formik.values.email}
 											type='text'
 											id='email'
 											className='textInput'
@@ -532,7 +530,7 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- persian name input -------------------------*/}
 										<label htmlFor='PersianName'>Persian first name</label>
 										<input
-											value={formik.values.perisanFirstName}
+											value={formik.values && formik.values.perisanFirstName}
 											type='text'
 											id='PersianName'
 											className='textInput'
@@ -560,7 +558,7 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- persian last input -------------------------*/}
 										<label htmlFor='PersianLastName'>Persian last name</label>
 										<input
-											value={formik.values.persianLastName}
+											value={formik.values && formik.values.persianLastName}
 											type='text'
 											id='PersianLastName'
 											className='textInput'
@@ -589,7 +587,7 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- english first name input -------------------------*/}
 										<label htmlFor='EnglishFirstName'>English first name</label>
 										<input
-											value={formik.values.englishFirstName}
+											value={formik.values && formik.values.englishFirstName}
 											type='text'
 											id='EnglishFirstName'
 											className='textInput'
@@ -616,7 +614,7 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- english last name input -------------------------*/}
 										<label htmlFor='EnglishLastName'>English last name</label>
 										<input
-											value={formik.values.englishLastName}
+											value={formik.values && formik.values.englishLastName}
 											type='text'
 											id='EnglishLastName'
 											className='textInput'
@@ -645,7 +643,7 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- en description input -------------------------*/}
 										<label htmlFor='enDescription'>English description</label>
 										<textarea
-											value={formik.values.description_en}
+											value={formik.values && formik.values.description_en}
 											type='text'
 											id='enDescription'
 											className='textInput'
@@ -672,7 +670,7 @@ const EditModal = ({ userId, userData }) => {
 										{/* ---------------- fa description input -------------------------*/}
 										<label htmlFor='faDescription'>Persian description</label>
 										<textarea
-											value={formik.values.description_fa}
+											value={formik.values && formik.values.description_fa}
 											type='text'
 											id='faDescription'
 											className='textInput'
@@ -737,7 +735,7 @@ const EditModal = ({ userId, userData }) => {
 									})}
 								</div>
 								<div className='d-flex justify-content-end'>
-									<button type='submit' id='submitForm2'>
+									<button type='submit' id='submitFormEdit'>
 										submit
 									</button>
 								</div>

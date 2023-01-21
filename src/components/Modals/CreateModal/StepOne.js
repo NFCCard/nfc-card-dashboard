@@ -83,10 +83,10 @@ const StepOne = ({ onSubmit, isLoading }) => {
 									</span>
 								)}
 						</div>
+						<button type='submit' id='submit_form'>
+							{isLoading ? "loading" : "submit"}
+						</button>
 					</div>
-					<button type='submit' id='submit_form'>
-						{isLoading ? "loading" : "submit"}
-					</button>
 				</form>
 			</div>
 		</div>

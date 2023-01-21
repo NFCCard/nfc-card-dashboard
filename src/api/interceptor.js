@@ -52,8 +52,8 @@ axios.interceptors.response.use(
 	},
 	function(error) {
 		Object.entries(error.response.data.errors).map((messages) => {
-			messages[1].map((err) => {
-				Toastify({ type: "error", text: err, id: err });
+			return messages[1].map((err) => {
+				return Toastify({ type: "error", text: err, id: err });
 			});
 		});
 
