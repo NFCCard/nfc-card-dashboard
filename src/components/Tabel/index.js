@@ -11,6 +11,7 @@ import CreateModal from "../Modals/CreateModal/CreateModal";
 import Pagination from "../Pagination";
 import useGetUserList from "../../hooks/core/useGetUserList";
 import { useEffect } from "react";
+import Loader from "../Loader/Loader";
 
 const Table = ({ content, isLoading, setPage }) => {
 	console.log(content && content.meta);
@@ -147,7 +148,7 @@ const Table = ({ content, isLoading, setPage }) => {
 					</div>
 				</>
 			) : (
-				<h2 className='text-light'>loading</h2>
+				<Loader />
 			)}
 		</>
 	);

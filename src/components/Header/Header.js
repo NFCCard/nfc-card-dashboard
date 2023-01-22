@@ -22,13 +22,15 @@ const Header = () => {
 
 	return (
 		<>
-			{location.pathname === "/users" && (
+			{location.pathname === "/users" ? (
 				<div className='buttonWrapper'>
 					<button onClick={() => openCreateModalHandler()} className='Button_Primary'>
 						<FontAwesomeIcon icon={solid("add")} color='#000' />
 						Create
 					</button>
 				</div>
+			) : (
+				<div></div>
 			)}
 			<div className='header_title'>
 				<div className='logoWrapper'>

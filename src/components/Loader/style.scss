@@ -1,0 +1,33 @@
+.loader-wrapper {
+	width: 100%;
+	z-index: 10000;
+	height: 100vh;
+	max-height: 100vh;
+	background-color: #0c0c0c3d;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.loader {
+		width: 150px;
+		display: inline-block;
+		color: #fff;
+		box-sizing: border-box;
+		animation: animloader 1s ease-in infinite alternate;
+	}
+}
+
+@keyframes animloader {
+	0% {
+		filter: blur(0px);
+		transform: skew(0deg);
+	}
+	100% {
+		filter: blur(3px);
+		transform: skew(-4deg);
+	}
+}
