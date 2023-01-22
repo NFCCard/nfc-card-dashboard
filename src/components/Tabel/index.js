@@ -8,8 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { ModalContext } from "../../context/ModalContextProvider";
 import CreateModal from "../Modals/CreateModal/CreateModal";
+import Pagination from "../Pagination";
+import useGetUserList from "../../hooks/core/useGetUserList";
+import { useEffect } from "react";
 
-const Table = ({ content, isLoading }) => {
+const Table = ({ content, isLoading, setPage }) => {
+	console.log(content && content.meta);
+
 	const { setModalState } = useContext(ModalContext);
 	const [user, setUser] = useState();
 
@@ -132,6 +137,13 @@ const Table = ({ content, isLoading }) => {
 							modalId={user && user.id}
 						/>
 						<CreateModal />
+						<Pagination
+							data={{
+								page: content.meta.current_page,
+								totalPages: content.meta.last_page,
+							}}
+							onPaginateClick={(_page) => setPage(_page)}
+						/>
 					</div>
 				</>
 			) : (

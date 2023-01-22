@@ -1,8 +1,9 @@
 import axios from "../axiosInstance";
 import routes from "../routes";
 
-const userList = async (data) => {
-	const response = await axios.get(routes.core.userlist, {
+const userList = async (pageNumber) => {
+	console.log(pageNumber);
+	const response = await axios.get(routes.core.userlist + `?page=${pageNumber}`, {
 		params: { include_filter: "profile" },
 	});
 
