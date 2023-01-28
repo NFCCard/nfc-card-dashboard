@@ -21,7 +21,7 @@ const useLogin = () => {
 					}),
 					{ expires: day }
 				);
-				window.location.replace("/dashboard");
+				window.location.reload();
 			}
 		},
 	});
