@@ -1,6 +1,7 @@
 {
+	"homepage": "http://dashboard.nfccardapp.ir",
 	"name": "nfc-card-dashboard",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"private": true,
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.2.1",
