@@ -9,7 +9,7 @@ function Dashboard() {
 				<h3 className=''>
 					Hello Admin{" "}
 					<span role='img' aria-label='banana'>
-						🍌
+						😎❤️
 					</span>
 				</h3>
 			</div>

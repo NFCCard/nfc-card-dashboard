@@ -25,7 +25,7 @@ function Navigation() {
 				</Routes>
 			) : (
 				<Routes>
-					<Route path='/*' element={<Login />} />
+					<Route path='/' element={<Login />} />
 				</Routes>
 			)}
 		</>

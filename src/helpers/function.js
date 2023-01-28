@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 
 export function logOuthandler() {
 	Cookies.remove("INFO");
-	window.location.replace("/login");
+	window.location.replace("/");
 }
 
 export function formatPhoneNumber(phoneNumberString) {
