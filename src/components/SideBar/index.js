@@ -10,7 +10,7 @@ const SideBar = () => {
 			title: "Dashboard",
 		},
 		{
-			buttonUrl: "/users",
+			buttonUrl: "/users?page=1",
 			title: "Users",
 		},
 	];

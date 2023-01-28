@@ -10,7 +10,7 @@ const useCreateUser = () => {
 	const { modalState } = useContext(ModalContext);
 	const { setUserData } = useContext(UserDataContext);
 	const { mutate: viewId } = useViewUsersById();
-	const { refetch } = useGetUserList();
+	const { refetch } = useGetUserList(1);
 
 	return useMutation((value) => postRequest.createUser(value), {
 		onError: (error, variables, context) => {

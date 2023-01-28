@@ -6,18 +6,18 @@ import useGetUserList from "./useGetUserList";
 
 const useDeleteUser = () => {
 	const { setModalState } = useContext(ModalContext);
-	const { refetch } = useGetUserList();
+	const { refetch } = useGetUserList(1);
 
 	return useMutation((userId) => deleteRequest.deleteUser(userId), {
 		onError: (error, variables, context) => {
 			// An error happened!
 		},
 		onSuccess: (data, variables, context) => {
-			refetch();
 			setModalState((prev) => ({
 				...prev,
 				delete: false,
 			}));
+			refetch();
 		},
 	});
 };

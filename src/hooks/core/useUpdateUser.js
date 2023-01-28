@@ -5,15 +5,12 @@ import { UserDataContext } from "../../context/UserDataContextProvider";
 import useGetUserList from "./useGetUserList";
 
 const useUpdateUser = () => {
-	const { refetch } = useGetUserList();
+	const { refetch } = useGetUserList(1);
 	const { setUserData } = useContext(UserDataContext);
 
 	return useMutation((value) => patchRequest.updateUser(value), {
-		onError: (error, variables, context) => {
-			console.log(error);
-		},
+		onError: (error, variables, context) => {},
 		onSuccess: (data, variables, context) => {
-			console.log(data);
 			refetch();
 			setUserData({
 				userProfileId: "",

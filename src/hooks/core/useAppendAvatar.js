@@ -3,7 +3,7 @@ import postRequest from "../../api/post";
 import useGetUserList from "./useGetUserList";
 
 const useAppendAvatar = () => {
-	const { refetch } = useGetUserList();
+	const { refetch } = useGetUserList(1);
 
 	return useMutation((value) => postRequest.appendAvatar(value), {
 		onError: (error, variables, context) => {

@@ -249,7 +249,6 @@ const StepTwo = () => {
 
 	const handleSubmit = (values) => {
 		let socialMediaList = [];
-		console.log(values);
 		if (values.telegram) socialMediaList.push({ social: "telegram", url: values.telegram });
 		if (values.instagram) socialMediaList.push({ social: "instagram", url: values.instagram });
 		if (values.whatsapp) socialMediaList.push({ social: "whatsapp", url: values.whatsapp });
@@ -297,7 +296,6 @@ const StepTwo = () => {
 		initialValues: initialValues,
 		validationSchema: createFormStepTwoValidaition,
 		onSubmit: (values) => {
-			console.log(values);
 			handleSubmit(values);
 		},
 	});
@@ -419,7 +417,7 @@ const StepTwo = () => {
 						</div>
 						<div className=' d-flex col-12 gap-3 justify-content-center align-items-center'>
 							<div className='d-flex flex-column w-75 position-relative'>
-								{/* ---------------- persian first name input -------------------------*/}
+								{/* persian first name */}
 
 								<label htmlFor='PersianFirstName'>Persian first name</label>
 								<input

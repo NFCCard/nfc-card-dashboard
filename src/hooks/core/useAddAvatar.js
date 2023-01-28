@@ -6,7 +6,7 @@ import useAppendAvatar from "./useAppendAvatar";
 import useGetUserList from "./useGetUserList";
 
 const useAddAvatar = () => {
-	const { refetch } = useGetUserList();
+	const { refetch } = useGetUserList(1);
 	const { userData } = useContext(UserDataContext);
 	const { mutate: addMutate } = useAppendAvatar();
 

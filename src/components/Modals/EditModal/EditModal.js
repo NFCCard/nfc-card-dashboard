@@ -345,7 +345,6 @@ const EditModal = ({ userId, userData }) => {
 
 	const handleSubmit = (values) => {
 		let socialMediaList = [];
-		console.log(values);
 		if (values.telegram.length)
 			socialMediaList.push({ social: "telegram", url: values.telegram });
 		if (values.instagram.length)

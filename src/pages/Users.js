@@ -1,25 +1,34 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Table } from "../components";
+import Loader from "../components/Loader/Loader";
 import useGetUserList from "../hooks/core/useGetUserList";
 import Layout from "../layout";
 
 function Users() {
-	const { data, isLoading: userListLoading, mutate: userMutate } = useGetUserList();
-	const [page, setPage] = useState(1);
+	const loaction = useLocation();
+	const navigate = useNavigate();
+	const { data, isLoading, refetch } = useGetUserList({
+		pageParam: loaction.search.split("=")[1],
+	});
 
-	console.log(page);
+	if (data && data.meta.total <= 15) {
+		loaction.search = "?page=1";
+	}
 
 	useEffect(() => {
-		userMutate(page);
-	}, [page]);
+		if (loaction.search) {
+			return;
+		}
+		navigate(`/users?page=${1}`);
+	}, []);
 
-	return (
-		<Layout>
-			<Table content={data} isLoading={userListLoading} setPage={setPage} />
-		</Layout>
-	);
+	useEffect(() => {
+		// userMutate(page);
+		refetch();
+	}, [loaction]);
+
+	return <Layout>{!isLoading ? <Table content={data} /> : <Loader />}</Layout>;
 }
 
 export default Users;

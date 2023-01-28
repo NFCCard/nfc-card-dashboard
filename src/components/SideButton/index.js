@@ -8,7 +8,7 @@ const SideButton = ({ buttonContent, ButtonUrl, onClick }) => {
 		<div>
 			<Link
 				className={`sideButton text-decoration-none ${
-					location.includes(ButtonUrl) ? "active" : ""
+					location.includes(ButtonUrl.split("?")[0]) ? "active" : ""
 				}`}
 				to={ButtonUrl}
 				onClick={onClick}
